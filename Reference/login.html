@@ -31,45 +31,4 @@
           </form>
     </div>
 </div>
-
-<!--JavaScript code for login functionality-->
-<script type = "text/javascript">
-    $(document).ready(function ()
-    {
-        $("#login").on('click', function ()
-        {
-            var userId = $("#inputUID").val();
-            console.log(userId);
-
-            var paswrd = $('#inputPassword').val();
-            console.log(paswrd);
-
-            var arr = {login: userId, password: paswrd};
-
-
-            if (userId == "" || paswrd == "")
-                alert('Please enter valid Username and Password');
-            else
-            {
-                <!--Connecting to API-->
-                $.ajax(
-                {
-                    url: '/LAMPAPI/UserLogin.php',
-                    type: "POST",
-                    data: JSON.stringify(arr),
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function(response)
-                    {
-                        console.log(response.status);
-                    },
-                    dataType: 'text'
-                }
-                )
-            }
-        });
-    });
-</script>
-
-
 </body>
