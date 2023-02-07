@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = "stylesheet" href = "./loginStyle.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class = "align-self-xl-start">
+    <button type="button" class="btn btn-primary" onclick= "location.href='index.html'">Return Home</button>
+  </div>
+  <h2 class = "text-black text-center mb-4">Log In</h2>
+  <div class = "container align-center">
+    <div class="card col-4 mx-auto px-4 py-4">
+        <form>
+            <div class="form-group">
+              <input type="text" class="form-control" id="inputUID" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            </div>
+            <div class = "text-center">
+              <button type="button" class="btn btn-primary" id = "login">Login</button>
+            </div>
+          </form>
+    </div>
+</div>
+
+<!--JavaScript code for login functionality-->
+<script type = "text/javascript">
+    $(document).ready(function ()
+    {
+        $("#login").on('click', function ()
+        {
+            var userId = $("#inputUID").val();
+            console.log(userId);
+
+            var paswrd = $('#inputPassword').val();
+            console.log(paswrd);
+
+            var arr = {login: userId, password: paswrd};
+
+
+            if (userId == "" || paswrd == "")
+                alert('Please enter valid Username and Password');
+            else
+            {
+                <!--Connecting to API-->
+                $.ajax(
+                {
+                    url: '/LAMPAPI/UserLogin.php',
+                    type: "POST",
+                    data: JSON.stringify(arr),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(response)
+                    {
+                        console.log(response.status);
+                    },
+                    dataType: 'text'
+                }
+                )
+            }
+        });
+    });
+</script>
+
+
+</body>
