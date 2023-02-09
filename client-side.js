@@ -6,13 +6,13 @@
 // generateTable();
 //  fixDataTable();
 
-var currentContact= {
-  firstName: "fname",
-  lastName: "lname",
-  phoneNumber: "123",
-  email: "test",
-  dateCreated: new Date("8/12/2001")
-}
+// var currentContact= {
+//   firstName: "fname",
+//   lastName: "lname",
+//   phoneNumber: "123",
+//   email: "test",
+//   dateCreated: new Date("8/12/2001")
+// }
 
 var contactListTEMP =[{
   firstName: "Clementine",
@@ -252,13 +252,12 @@ function sortTable(n) {
 }
 function getContact(id){
 kids = id.children
- currentContact.firstName = kids[0].innerText;
- currentContact.lastName = kids[1].innerText;
- currentContact.email=kids[3].innerText
- currentContact.phoneNumber = kids[2].innerText
- currentContact.dateCreated = kids[4].innerText
- console.log(currentContact)
-
+console.log(localStorage.getItem("firstName"))
+localStorage.setItem("firstName", kids[0].innerText);
+ localStorage.setItem("lastName", kids[1].innerText);
+ localStorage.setItem("email", kids[3].innerText);
+ localStorage.setItem("phoneNumber", kids[2].innerText);
+ localStorage.setItem("dateCreated", kids[4].innerText);
 }
 
 
@@ -287,38 +286,28 @@ function populateTable(){
 }
 function generateTable() {
 
-  
+  var width = window.innerWidth * 0.6
+  var height =window.innerHeight * 0.5
 
 let table = new DataTable('#contactList',{
   columns: [
-      {  data: 'firstName', title: 'First Name'},
-      { data: 'lastName', title: 'Last Name' },
-      {data:'phoneNumber',  title:  'Phone Number'  },
-      { data:'email', title:  'Email' },
-      { data: 'dateCreated' ,title:  'Date Created'}
+      {  data: 'firstName', title: 'First Name', className: 'row-border hover',width: "10%"},
+      { data: 'lastName', title: 'Last Name', className: 'row-border hover',width: "10%" },
+      {data:'phoneNumber',  title:  'Phone Number', className: 'row-border hover',width: "25%"  },
+      { data:'email', title:  'Email', className: 'row-border hover', width: "40%"},
+      { data: 'dateCreated' ,title:  'Date Created', className: 'row-border hover', width: "15%" }
   ],
+  scrollCollapse: true,
   data : contactListTEMP,
   rowId: 'contact',
-  scrollX: true,
+  scrollX: width,
+  scrollY: height,
   paging: true,
-  ordering: true,
-  searching: true,
   pageLength: 8,
   lengthMenu: [4,8,16],
-  buttons: false
+  buttons: false,
 });
 fixDataTable()
-// $('#contactList tbody').on( 'click', 'tr', function () {
-//   alert(TEST.row( this ).data())
-//   // getContact(table.row( this ).data());
-//   //  data = table.row( this ).data();
-//   //  console.log(data)
-//   // location.href='expand.html'
-
-//   // //  getContact(table.row( this ).data());
-//   // populateFullScreen(data);
-
-// } );
 
 
 
@@ -327,27 +316,84 @@ fixDataTable()
 
 function fixDataTable(){
 rows = document.getElementsByClassName("even")
-for(element of rows){
+for(element of rows)
+{
   element.setAttribute("onmouseover", "getContact(this);")
   element.setAttribute("onclick", " location.href='expand.html'")
 }
 rowsOdd= document.getElementsByClassName("odd")
-for(element of rowsOdd){
+for(element of rowsOdd)
+{
   element.setAttribute("onmouseover", "getContact(this);")
   element.setAttribute("onclick", " location.href='expand.html'")
   
 }
 
+buttons = document.getElementsByClassName("paginate_button page-item ")
+for(element of buttons){
+  var temp = element.getAttribute("class")
+  var att = temp.concat(" bg-dark border border-3 border-primary")
+  element.setAttribute("class", att)
+}
 
+links = document.getElementsByClassName("page-link")
+for(element of buttons){
+  var temp = element.getAttribute("class")
+  var att = temp.concat(" text-white bg-dark border border-3 border-primary")
+  element.setAttribute("class",att )
+}
+
+select = document.getElementsByTagName("select")
+for(element of select){
+  var temp = element.getAttribute("style")
+  if(temp){
+    var att = temp.concat(" color:white")
+    element.setAttribute("class",att )
+  }
+  if(temp){
+    var att = temp.concat(" color:white")
+    element.setAttribute("class",att )
+  }
+
+  var tempB= element.getAttribute("class")
+  var attB = tempB.concat(" text-white")
+  element.setAttribute("class",attB)
+  element.setAttribute("data-bs-theme","dark" )
+}
+
+
+search = document.getElementsByTagName('input')
+for(element of buttons){
+  var temp = element.getAttribute("class")
+  var att = temp.concat(" bg-dark text-white")
+  element.setAttribute("class", att)
+  element.setAttribute("style", 'color:white')
+}
 
 }
 
 function populateFullScreen(){
-console.log(currentContact)
-document.getElementById("displayFirst").innerText = currentContact.firstName
-document.getElementById("displayLast").innerText =currentContact.lastName
-document.getElementById("displayEmail").innerText =currentContact.email
-document.getElementById("displayPhone").innerText = currentContact.phoneNumber
-document.getElementById("displayDate").innerText = currentContact.dateCreated
+console.log(localStorage.getItem("firstName"))
+document.getElementById("displayFirst").innerText =  localStorage.getItem("firstName");
+document.getElementById("displayLast").innerText =localStorage.getItem("lastName");
+document.getElementById("displayEmail").innerText =localStorage.getItem("email");
+document.getElementById("displayPhone").innerText = localStorage.getItem("phoneNumber");
+document.getElementById("displayDate").innerText = localStorage.getItem("dateCreated");
 
+}
+
+function populateFullScreenEdit(){
+  console.log(localStorage.getItem("firstName"))
+  document.getElementById("displayFirst").innerText =  localStorage.getItem("firstName");
+  document.getElementById("displayLast").innerText =localStorage.getItem("lastName");
+  document.getElementById("displayEmail").innerText =localStorage.getItem("email");
+  document.getElementById("displayPhone").innerText = localStorage.getItem("phoneNumber");
+  
+  }
+
+function titleButFun(){
+  title = document.getElementsByTagName("title")
+  for(i of title ){
+    i.innerText =  localStorage.getItem("firstName").concat(" ".concat(localStorage.getItem("lastName")) ) 
+  }
 }
