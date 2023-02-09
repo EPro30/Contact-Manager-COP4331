@@ -397,3 +397,10 @@ function titleButFun(){
     i.innerText =  localStorage.getItem("firstName").concat(" ".concat(localStorage.getItem("lastName")) ) 
   }
 }
+
+function titleButFunEdit(){
+  title = document.getElementsByTagName("title")
+  for(i of title ){
+    i.innerText =  "Edit ".concat(localStorage.getItem("firstName").concat(" ".concat(localStorage.getItem("lastName")) ) )
+  }
+}
