@@ -295,7 +295,7 @@ let table = new DataTable('#contactList',{
       { data: 'lastName', title: 'Last Name', className: 'row-border hover',width: "10%" },
       {data:'phoneNumber',  title:  'Phone Number', className: 'row-border hover',width: "25%"  },
       { data:'email', title:  'Email', className: 'row-border hover', width: "40%"},
-      { data: 'dateCreated' ,title:  'Date Created', className: 'row-border hover', width: "15%" }
+      { data: 'dateCreated' ,title:  'Date Created', className: 'row-border hover', width: "15%", type: "date" }
   ],
   scrollCollapse: true,
   data : contactListTEMP,
@@ -367,7 +367,8 @@ for(element of buttons){
   var temp = element.getAttribute("class")
   var att = temp.concat(" bg-dark text-white")
   element.setAttribute("class", att)
-  element.setAttribute("style", 'color:white')
+  element.setAttribute("style", 'color:white!important')
+
 }
 
 }
