@@ -1,26 +1,26 @@
-// const urlBase = 'http://COP4331-5.com/LAMPAPI';
 const urlBase = 'http://cscop4331c.com/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
 let firstName = "";
 let lastName = "";
-let user;
+
+let contactFirstName = "";
+let contactLastName = "";
+let phoneNumber = "";
+let emailAddress = "";
+let contactId = "";
 
 function doLogin()
 {
-	userId = 0;
-	firstName = "";
-	lastName = "";
-
 	let login = document.getElementById("user").value;
 	let password = document.getElementById("pass").value;
 
 	// document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {login:login,password:password};
+	let tmp = {Login:login,Password:password};
 	let jsonPayload = JSON.stringify( tmp );
-	let url = urlBase + '/UserLogin.' + extension;
+	let url = urlBase + '/Login.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -32,26 +32,23 @@ function doLogin()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				user = new User(jsonObject.data[0].ID, jsonObject.data[0].FirstName, jsonObject.data[0].LastName);
 				
 				if (jsonObject.status == true)
 				{
-					userId = jsonObject.data[0].ID;
+					userId = jsonObject.response[0].ID;
 				}
 				else
 				{
-					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					// document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 					return;
 				}
 		
-				// firstName = jsonObject.firstName;
-				// lastName = jsonObject.lastName;
-				
-				console.log(user.userId + ' ' + user.firstName + ' ' + user.lastName);
+				firstName = jsonObject.response[0].FirstName;
+				lastName = jsonObject.response[0].LastName;
 
 				window.location.href = "contactList.html";
 
-				saveCookie();
+				saveUserCookie();
 			}
 		};
 		xhr.send(jsonPayload);
@@ -64,22 +61,23 @@ function doLogin()
 }
 
 function fetchContacts() {
-	let tmp = {userId: user.userId};
+	readUserCookie();
+	console.log(userId);
+	let tmp = {UserID: userId};
 	let jsonPayload = JSON.stringify( tmp );
-	console.log(jsonPayload);
-	let url = urlBase + '/ContactFetchAll.' + extension;
+	let url = urlBase + '/FetchAllContacts.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	
 
 	xhr.onreadystatechange = function() 
 	{
 		if (this.readyState == 4 && this.status == 200)
 		{
 			let jsonObject = JSON.parse( xhr.responseText );
-			populateTable(jsonObject);
+      if (jsonObject.status == true)
+			  populateTable(jsonObject.response);
 		}
 	};
 
@@ -91,23 +89,134 @@ function populateTable(jsonObject) {
 	for (var i = 0; i < jsonObject.length; i++)
 	{
 		var contact = jsonObject[i];
-		var row = "<tr><td>" + contact.firstName + "</td><td>" + contact.lastName + "</td><td>" + contact.phoneNumber + "</td><td>" + contact.email + "</td></tr>"; 
+		console.log(contact);
+		var row = "<tr><td>" + contact.FirstName + "</td><td>" + contact.LastName + "</td><td>" + contact.PhoneNumber + "</td><td>" + contact.EmailAddress + "</td></tr>"; 
 		tableBody.innerHTML += row;
 	}
 }
 
-function saveCookie()
+function SignUp()
+{
+  firstName = document.getElementById("fname").value;
+	lastName =  document.getElementById("lname").value;
+	let login = document.getElementById("username").value;
+	let password = document.getElementById("password").value;
+  
+	let tmp = {FirstName: firstName, LastName: lastName, Login: login, Password: password};
+	let jsonPayload = JSON.stringify( tmp );
+	let url = urlBase + '/SignUp.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try 
+	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse( xhr.responseText );
+
+				if (jsonObject.status == true)
+				{
+					// not the actual homepage
+					window.location.href = "contactList.html";
+
+          userId = jsonObject.ID;
+					saveUserCookie();
+				}
+				else
+				{
+					// document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					return;
+				}
+			}
+		};
+		xhr.send( jsonPayload );
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+
+}
+
+function deleteUser()
+{
+	
+}
+
+/*
+
+	create user - Completed
+		- firstname, lastname, login, password
+	update user
+		- firstname, lastname, login, password, id
+	delete user
+		- id
+	login user - completed
+	sign out - completed
+
+	fetch contacts - completed
+	update contact
+		- firstname, lastname, phoneNumber, emailAddress, userId
+	delete contact
+		- phoneNumber, userId
+	create contact
+		- firstname, lastname, phonenumber, emailaddress, userid
+
+	page close - completed
+
+*/
+
+function readCookie( name )
+{
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i < ca.length; i++)
+	{
+		var c = ca[i];
+		while (c.charAt(0) == ' ')
+			c = c.substring(1,c.length);
+
+		if (c.indexOf(nameEQ) == 0)
+			return c.substring(nameEQ.length, c.length);
+	}
+
+	return null;
+}
+
+function saveContactCookie()
 {
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+	document.cookie = "ContactCookie=firstName=" + contactFirstName + ",lastName=" + contactLastName + ",phoneNumber=" + phoneNumber + ",emailAddress=" + emailAddress + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
-function readCookie()
+
+function saveUserCookie()
+{
+	let minutes = 20;
+	let date = new Date();
+	date.setTime(date.getTime()+(minutes*60*1000));	
+	document.cookie = "UserCookie=firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+}
+
+function readContactCookie()
+{
+	
+}
+
+function readUserCookie()
 {
 	userId = -1;
-	let data = document.cookie;
+	// let data = document.cookie;
+	let data = readCookie("UserCookie");
+  if (data == null)
+  {
+    window.location.href = "index.html";
+  }
 	let splits = data.split(",");
 	for(var i = 0; i < splits.length; i++) 
 	{
@@ -133,7 +242,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		// document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
 }
 
@@ -142,115 +251,6 @@ function doLogout()
 	userId = 0;
 	firstName = "";
 	lastName = "";
-	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	document.cookie = "UserCookie=firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
-}
-
-function addColor()
-{
-	let newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
-
-	let tmp = {color:newColor,userId,userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/AddColor.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
-	
-}
-
-function searchColor()
-{
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
-	
-	let colorList = "";
-
-	let tmp = {search:srch,userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/SearchColors.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = async function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-				let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					colorList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						colorList += "<br />\r\n";
-					}
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
-	}
-	
-}
-
-
-class User {
-	constructor(userId, firstName, lastName) {
-		this._userId = id;
-		this._firstName = firstName;
-		this._lastName = lastName;
-	}
-
-	get userId() {
-		return this._userId;
-	}
-
-	set userId(value) {
-		this._userId = value;
-	}
-
-	get firstName() {
-		return this._firstName;
-	}
-
-	set firstName(value) {
-		this._firstName = value;
-	}
-
-	get lastName() {
-		return this._lastName;
-	}
-
-	set lastName(value) {
-		this._lastName = value;
-	}
 }
