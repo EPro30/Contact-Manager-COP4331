@@ -284,35 +284,102 @@ function populateTable(){
   
   }
 }
+  
 function generateTable() {
 
-  var width = window.innerWidth * 0.6
-  var height =window.innerHeight * 0.5
+  
+  console.log(window.innerWidth)
+  if(window.innerWidth < 800){
+    document.getElementById('contactList').setAttribute("data-detail-view", 'true')
+    details = true
+    
+  }
+ else{
+  details = false
+    document.getElementById('contactList').setAttribute("data-detail-view", 'false')
+  }
+ 
+  var table = $('#contactList').bootstrapTable({
+    columns: [{
+      field: 'firstName',
+      title: 'First Name',
+      sortable: "True",
+      dataVisible: "True"      
+    }, {
+      field: 'lastName',
+      title: 'Last Name',
+      sortable: "True",
+      dataVisible: "True"
+    }, {
+      field: 'phoneNumber',
+      title: 'Phone Number',
+      sortable: "True",
+      dataVisible: "False"
+    },{
+      field: 'email',
+      title: 'Email',
+      sortable: "True",
+      dataVisible: "False"
+    },{
+      field: 'dateCreated',
+      title: 'Date Created',
+      sortable: "True",
+      dataVisible: "False"
+    } ],
+    detailView: details,
+    // pagelist: [10, 25, 50, 100, 200],
+    data: contactListTEMP,
+    
+  })
 
-let table = new DataTable('#contactList',{
-  columns: [
-      {  data: 'firstName', title: 'First Name', className: 'row-border hover',width: "10%"},
-      { data: 'lastName', title: 'Last Name', className: 'row-border hover',width: "10%" },
-      {data:'phoneNumber',  title:  'Phone Number', className: 'row-border hover',width: "25%"  },
-      { data:'email', title:  'Email', className: 'row-border hover', width: "40%"},
-      { data: 'dateCreated' ,title:  'Date Created', className: 'row-border hover', width: "15%", type: "date" }
-  ],
-  scrollCollapse: true,
-  data : contactListTEMP,
-  rowId: 'contact',
-  scrollX: width,
-  scrollY: height,
-  paging: true,
-  pageLength: 8,
-  lengthMenu: [4,8,16],
-  buttons: false,
-});
-fixDataTable()
+  if(details){
+    table.bootstrapTable('hideColumn', 'email')
+    table.bootstrapTable('hideColumn', 'phoneNumber')
+    table.bootstrapTable('hideColumn', 'dateCreated')
+  }
+
+  // table.bootstrapTable('hideColumn', 'firstName')
+ 
+
+
+
+
+  
+  
+  
+//   
+
+// let table = new DataTable('#contactList',{
+//   columns: [
+//       {  data: 'firstName', title: 'First Name', className: 'row-border hover',width: "10%"},
+//       { data: 'lastName', title: 'Last Name', className: 'row-border hover',width: "10%" },
+//       {data:'phoneNumber',  title:  'Phone Number', className: 'row-border hover',width: "25%"  },
+//       { data:'email', title:  'Email', className: 'row-border hover', width: "40%"},
+//       { data: 'dateCreated' ,title:  'Date Created', className: 'row-border hover', width: "15%", type: "date" }
+//   ],
+//   scrollCollapse: true,
+//   data : contactListTEMP,
+//   rowId: 'contact',
+//   scrollX: width,
+//   scrollY: height,
+//   paging: true,
+//   pageLength: 8,
+//   lengthMenu: [4,8,16],
+//   buttons: false,
+// });
+// fixDataTable()
 
 
 
   }
 
+  function detailFormatter(index, row) {
+    var html = []
+    $.each(row, function (key, value) {
+      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    })
+    return html.join('')
+  }
 
 function fixDataTable(){
 rows = document.getElementsByClassName("even")
