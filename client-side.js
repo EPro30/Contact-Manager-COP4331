@@ -327,8 +327,13 @@ function generateTable() {
       dataVisible: "False"
     } ],
     detailView: details,
-    // pagelist: [10, 25, 50, 100, 200],
+    smartDisplay: true,
+    // pageSize: 8,
+    // pageList: [4,8,16],
     data: contactListTEMP,
+    pagination: true,
+    pageSize: 8, //your page size here
+    pageList: [25, 50, 75, 100]//list of page sizes
     
     
   })
@@ -340,7 +345,7 @@ function generateTable() {
     localStorage.setItem("email", $el.email);
     localStorage.setItem("phoneNumber",$el.phoneNumber);
     localStorage.setItem("dateCreated",$el.dateCreated);
-    window.location.href = "expand.html";
+    window.location.href = "edit.html";
 
 
   });
