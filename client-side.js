@@ -252,7 +252,7 @@ function sortTable(n) {
 }
 function getContact(id){
 kids = id.children
-console.log(localStorage.getItem("firstName"))
+console.log( kids[0].innerText)
 localStorage.setItem("firstName", kids[0].innerText);
  localStorage.setItem("lastName", kids[1].innerText);
  localStorage.setItem("email", kids[3].innerText);
@@ -330,13 +330,28 @@ function generateTable() {
     // pagelist: [10, 25, 50, 100, 200],
     data: contactListTEMP,
     
+    
   })
+
+  $("#contactList").on("click-row.bs.table", function (row, $el, field) {
+   console.log($el.firstName)
+    localStorage.setItem("firstName", $el.firstName);
+    localStorage.setItem("lastName", $el.lastName);
+    localStorage.setItem("email", $el.email);
+    localStorage.setItem("phoneNumber",$el.phoneNumber);
+    localStorage.setItem("dateCreated",$el.dateCreated);
+    window.location.href = "expand.html";
+
+
+  });
 
   if(details){
     table.bootstrapTable('hideColumn', 'email')
     table.bootstrapTable('hideColumn', 'phoneNumber')
     table.bootstrapTable('hideColumn', 'dateCreated')
   }
+  
+
 
   // table.bootstrapTable('hideColumn', 'firstName')
  
@@ -376,7 +391,22 @@ function generateTable() {
   function detailFormatter(index, row) {
     var html = []
     $.each(row, function (key, value) {
-      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+      if(key == 'firstName'){
+        html.push('<p><b>' + 'First Name' + ':</b> ' + value + '</p>')
+      }
+      else if(key == 'lastName'){
+        html.push('<p><b>' + 'Last Name' + ':</b> ' + value + '</p>')
+      }
+      else if(key == 'email'){
+        html.push('<p><b>' + 'Email' + ':</b> ' + value + '</p>')
+      }
+      else if(key == 'phoneNumber'){
+        html.push('<p><b>' + 'Phone Number' + ':</b> ' + value + '</p>')
+      }
+      else if(key == 'dateCreated'){
+        html.push('<p><b>' + 'Date Created' + ':</b> ' + value + '</p>')
+      }
+      
     })
     return html.join('')
   }
