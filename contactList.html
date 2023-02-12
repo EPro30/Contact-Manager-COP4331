@@ -1,62 +1,122 @@
-<html class = "contactList">
-    <head>
-        <link rel="stylesheet" href="styles.css" >
-        <title>Home</title>
-    </head>
-    <script src="PLACEHOLDER.js"></script>
-    <body class = "contactListGrid">
-            <div class="navigation">
-                <button  onclick="location.href='search.html'">
-                    Search
-                </button >
-                <button>
-                    Sort
-                </button>
-                <button  onclick="location.href='addContact.html'">
-                    Add Contact
-                </button>
-                <button  onclick="location.href='settings.html'">
-                    Settings
-                </button>
-                <button  onclick="location.href='welcome.html'">
-                    Logout
-                </button>
-            </div>
-    
-            <div class="contactsList">
+<!DOCTYPE html >
+<html lang="en"  data-bs-theme="dark">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="client-side.js"></script>
 
-            
 
-            </div>
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.2/cr-1.6.1/kt-2.8.1/rr-1.3.2/sc-2.1.0/datatables.min.css"/> -->
+  <!-- <link rel="stylesheet" type="text/css" src = "custom.css"/> -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.2/cr-1.6.1/kt-2.8.1/rr-1.3.2/sc-2.1.0/datatables.min.css"/> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.2/cr-1.6.1/kt-2.8.1/rr-1.3.2/sc-2.1.0/datatables.min.js"></script> -->
+<!-- new bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css">
+<script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css" rel="stylesheet">
 
-            <div class="currentContact">
-                    <button>
-                        expand
-                    </button>
+<script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
+<style>
+        th   {
+          min-width: fit-content !important;
+        }
+        td{
+          min-width: fit-content !important;
+        }
+	
 
-                    <div>
-                        First name:
-                    </div>
-                    <div>
-                        Last name:
-                    </div>
-                    <div>
-                        Email:
-                    </div>
-                    <div>
-                       Phone:
-                    </div>
-                    <div>
-                        Date Created:
-                    </div>
+	
+  </style>
+  <link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
+<link href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css" rel="stylesheet">
 
-                
-                
-            </div>
+<script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.21.2/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
+
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.2/b-2.3.4/b-colvis-2.3.4/b-html5-2.3.4/b-print-2.3.4/cr-1.6.1/date-1.3.0/fc-4.2.1/r-2.4.0/sc-2.1.0/sb-1.4.0/sp-2.1.1/datatables.css"/> -->
+ 
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.2/b-2.3.4/b-colvis-2.3.4/b-html5-2.3.4/b-print-2.3.4/cr-1.6.1/date-1.3.0/fc-4.2.1/r-2.4.0/sc-2.1.0/sb-1.4.0/sp-2.1.1/datatables.js"></script> -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css">
+</head>
+
+<body class="bg-primary pt-auto" onload ="generateTable()">
+
+  <nav class="navbar navbar-default bg-default" aria-label="First navbar example" data-beeline-skip="true"> 
+    <div class="container-fluid mx-auto ps-5">
+      
+     <button class="navbar-toggler" type="button"data-bs-toggle="offcanvas" data-bs-target="#demo">
+    <span class="navbar-toggler-icon"></span>
+  </button> 
+  <div class="navbar-collapse collapse show" id="navbarsExample01">
+  </div>
+ </div> 
+  <div class="offcanvas offcanvas-end bg-dark text-white" id="demo">
+    <div class="offcanvas-header">
+    </div>
+    <div class="offcanvas-body align-content-center">
+      <div class="d-grid gap-3  align-content-center">
+        <button type="button" class="btn btn-outline-primary btn-block rounded-pill" onclick="location.href='addContact.html'">Add Contact</button>
+        <button type="button" class="btn btn-outline-primary btn-block rounded-pill" >Settings</button>
+        <button type="button" class= "btn btn-outline-primary btn-block rounded-pill" >Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+  
+  
+    <div class="container h-75 d-flex align-items-center justify-content-center ">
+		
         
-           
+      <div class="row">
+
+        <div class="row container d-flex justify-content-center">
+
+          <div class="col-8- stretch-card ">
             
+                        <div class="card card-xlg bg-dark table-responsive-sm w-100 py-3 rounded-5 shadow-lg">
+                          <div class="card-body bg-dark rounded-5 mw-auto text-white bg-dark" >
+
+                           
+                            <div class="table-sm rounded-5 w-100 px-5" data-bs-theme="dark">
+                          <table class="table table-sm table-responsive-md table-dark table-hover align-middle text-center rounded-5  flex-fill w-100" id="contactList" 
+                          data-search="true" 
+                          data-pagination="true"
+                          data-bs-theme="dark"
+                          data-page-size="8"
+                          data-resizable="true"
+                          data-id-table="advancedTable"
+                          data-advanced-search="true"
+                          data-detail-formatter="detailFormatter"
+                          > </table>
+          
+                          
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
         </div>
-    </body>
+        
+      </div>
+
+    </div>
+</body>
+
 
 </html>
