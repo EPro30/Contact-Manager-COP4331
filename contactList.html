@@ -26,12 +26,12 @@
 
 <script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
 <style>
-        th   {
-          min-width: fit-content !important;
-        }
-        td{
-          min-width: fit-content !important;
-        }
+  th, td {
+    padding-top: 5px !important;
+    padding-bottom: 5px  !important;
+    padding-left: 5px  !important;
+    padding-right: 5px  !important;
+  }
 	
 
 	
@@ -96,13 +96,11 @@
                             <div class="table-sm rounded-5 w-100 px-5" data-bs-theme="dark">
                           <table class="table table-sm table-responsive-md table-dark table-hover align-middle text-center rounded-5  flex-fill w-100" id="contactList" 
                           data-search="true" 
-                          data-pagination="true"
-                          data-bs-theme="dark"
-                          data-page-size="8"
-                          data-resizable="true"
-                          data-id-table="advancedTable"
-                          data-advanced-search="true"
                           data-detail-formatter="detailFormatter"
+                          data-mobile-responsive="true"
+                          data-check-on-init="true"
+                          data-smart-display=" False"
+
                           > </table>
           
                           
