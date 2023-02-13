@@ -8,12 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="client-side.js"></script>
 
-
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.2/cr-1.6.1/kt-2.8.1/rr-1.3.2/sc-2.1.0/datatables.min.css"/> -->
-  <!-- <link rel="stylesheet" type="text/css" src = "custom.css"/> -->
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.2/cr-1.6.1/kt-2.8.1/rr-1.3.2/sc-2.1.0/datatables.min.css"/> -->
-<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.2/cr-1.6.1/kt-2.8.1/rr-1.3.2/sc-2.1.0/datatables.min.js"></script> -->
-<!-- new bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
@@ -25,7 +20,7 @@
 <link href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css" rel="stylesheet">
 
 <script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
-<style>
+<!-- <style>
   th, td {
     padding-top: 5px !important;
     padding-bottom: 5px  !important;
@@ -35,7 +30,7 @@
 	
 
 	
-  </style>
+  </style> -->
   <link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
 <link href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css" rel="stylesheet">
 
@@ -53,55 +48,71 @@
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css">
 </head>
 
-<body class="bg-primary pt-auto" onload ="generateTable()">
+<body class="bg-primary p-auto" onload ="generateTable()">
 
-  <nav class="navbar navbar-default bg-default d-flex flex-row-reverse" aria-label="First navbar example" data-beeline-skip="true"> 
+  <!-- <nav class="navbar navbar-default bg-default d-flex flex-row-reverse" aria-label="First navbar example" data-beeline-skip="true"> 
     <div class="container-fluid mx-auto ps-5 d-flex flex-row-reverse">
       
      <button class="navbar-toggler" type="button"data-bs-toggle="offcanvas" data-bs-target="#demo">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"> </span>
   </button> 
   <div class="navbar-collapse collapse show" id="navbarsExample01">
   </div>
  </div> 
-  <div class="offcanvas offcanvas-end bg-dark text-white" id="demo">
-    <div class="offcanvas-header">
-    </div>
-    <div class="offcanvas-body align-content-center">
-      <div class="d-grid gap-3  align-content-center">
-        <button type="button" class="btn btn-outline-primary btn-block rounded-pill" onclick="location.href='addContact.html'">Add Contact</button>
-        <button type="button" class="btn btn-outline-primary btn-block rounded-pill" >Settings</button>
-        <button type="button" class= "btn btn-outline-primary btn-block rounded-pill" >Logout</button>
-      </div>
+  
+</nav> -->
+
+<div class="offcanvas offcanvas-end bg-dark text-white p-auto" id="demo">
+  <div class="offcanvas-header">
+  </div>
+  <div class="offcanvas-body align-content-center py-auto">
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"> </button>
+    <div class="d-grid gap-3  align-content-center">
+      <button type="button" class="btn btn-outline-primary btn-block rounded-pill" onclick="location.href='addContact.html'">Add Contact</button>
+      <button type="button" class="btn btn-outline-primary btn-block rounded-pill" >Settings</button>
+      <button type="button" class= "btn btn-outline-primary btn-block rounded-pill" >Logout</button>
     </div>
   </div>
-</nav>
-
-
+</div>
   
   
-    <div class="container h-75 d-flex align-items-center justify-content-center ">
+    <div class="container h-75  align-items-center justify-content-center my-5">
 		
         
-      <div class="row">
+      <div class="row py-auto">
 
-        <div class="row container d-flex justify-content-center">
+        <div class="row container justify-content-center">
 
-          <div class="col-8- stretch-card ">
+          <div class="col--9 w-100 ">
             
-                        <div class="card card-xlg bg-dark table-responsive-sm w-100 py-3 rounded-5 shadow-lg">
+                        <div class="card card-xlg bg-dark table-responsive w-100 py-3 rounded-5 shadow-lg">
+                        
                           <div class="card-body bg-dark rounded-5 mw-auto text-white bg-dark" >
-
+                          
                            
-                            <div class="table-sm rounded-5 w-100 px-5" data-bs-theme="dark">
-                          <table class="table table-sm table-responsive-md table-dark table-hover align-middle text-center rounded-5  flex-fill w-100" id="contactList" 
+                            <div class="table-sm rounded-5 w-100 px-1" data-bs-theme="dark">
+                              <div id="toolBar " class="d-flex p-3">
+                                <button class="toggler bg-dark text-secondary border-0 toggler-lg" type="button"data-bs-toggle="offcanvas" data-bs-target="#demo">
+                                  
+                                    
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                
+                                </button> 
+                                <input type="email" class="form-control rounded-pill" id="customSearch" placeholder="search">
+                               
+                               
+                              </div>
+
+                              
+                          <table class="table table-sm table-dark table-hover align-middle text-center rounded-5 w-100 p-3 " id="contactList" 
                           data-search="true" 
                           data-detail-formatter="detailFormatter"
-                          data-mobile-responsive="true"
                           data-check-on-init="true"
-                          data-smart-display=" False"
-
-                          > </table>
+                          data-search-selector="#customSearch"
+                          > 
+                        </table>
           
                           
                             </div>

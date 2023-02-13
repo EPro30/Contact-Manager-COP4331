@@ -160,96 +160,6 @@ var contactListTEMP =[{
   dateCreated: "4/30/2019"
 }]
 
-
-
-
-
-function search() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("searchBar");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("contactList");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    tdF= tr[i].getElementsByTagName("td")[0];
-    tdL= tr[i].getElementsByTagName("td")[1];
-    tdE= tr[i].getElementsByTagName("td")[2];
-    tdP= tr[i].getElementsByTagName("td")[3];
-    tdD= tr[i].getElementsByTagName("td")[4];
-    
-
-    if (tdF || tdL || tdE || tdP || tdD) {
-      txtValueF= ((tdF.textContent || tdF.innerText) .toUpperCase().indexOf(filter)) >-1;
-      txtValueL= ((tdL.textContent || tdL.innerText) .toUpperCase().indexOf(filter)) >-1;
-      txtValueE=(( tdE.textContent || tdE.innerText) .toUpperCase().indexOf(filter)) >-1;
-      txtValueP = ((tdP.textContent || tdP.innerText) .toUpperCase().indexOf(filter)) >-1;
-      txtValueD = ((tdD.textContent || tdPD.innerText) .toUpperCase().indexOf(filter)) >-1;
-
-      if (txtValueF || txtValueL || txtValueE ||txtValueP || txtValueD) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("contactList");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = "asc"; 
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-      /*check if the two rows should switch place,
-      based on the direction, asc or desc:*/
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      //Each time a switch is done, increase this count by 1:
-      switchcount ++;      
-    } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
-}
 function getContact(id){
 kids = id.children
 console.log( kids[0].innerText)
@@ -260,80 +170,55 @@ localStorage.setItem("firstName", kids[0].innerText);
  localStorage.setItem("dateCreated", kids[4].innerText);
 }
 
-
-function populateTable(){
-  table = document.getElementById("contactList");
-  data = contactListTEMP;
-  for (let element of data) {
-    let row = table.insertRow( document.getElementById("contactList").rows.length);
-    row.setAttribute("class", " text-center flex-fill px-3 ")
-    row.setAttribute("onClick", "location.href='Expand.html'; getContact(this);")
-    row.setAttribute("class",  " text-center flex-fill px-3 ")
-    row.setAttribute("style",  "white-space: nowrap;")
-    var cell1 = row.insertCell(0);
-    cell1.innerText = element.firstName
-    var cell2 = row.insertCell(1);
-    cell2.innerText = element.lastName
-    var cell3 = row.insertCell(2);
-    cell3.innerText = element.email
-    var cell4 = row.insertCell(3);
-    cell4.innerText = element.phoneNumber
-    var cell5 = row.insertCell(4);
-    cell5.innerText  = element.dateCreated
-  
-  
-  }
-}
   
 function generateTable() {
 
   
   console.log(window.innerWidth)
   if(window.innerWidth < 800){
-    document.getElementById('contactList').setAttribute("data-detail-view", 'true')
     details = true
-    
   }
  else{
   details = false
-    document.getElementById('contactList').setAttribute("data-detail-view", 'false')
+    
   }
  
   var table = $('#contactList').bootstrapTable({
     columns: [{
       field: 'firstName',
-      title: 'First Name',
+      title: 'First \n Name',
       sortable: "True",
+      cellStyle: 'cellStyle',
       dataVisible: "True"      
     }, {
       field: 'lastName',
-      title: 'Last Name',
+      title: 'Last \nName',
       sortable: "True",
+      cellStyle: 'cellStyle',
       dataVisible: "True"
     }, {
       field: 'phoneNumber',
-      title: 'Phone Number',
+      title: 'Phone \n Number',
       sortable: "True",
+      cellStyle: 'cellStyle',
       dataVisible: "False"
     },{
       field: 'email',
       title: 'Email',
       sortable: "True",
+      cellStyle: 'cellStyle',
       dataVisible: "False"
-    },{
-      field: 'dateCreated',
-      title: 'Date Created',
-      sortable: "True",
-      dataVisible: "False"
-    } ],
-    detailView: details,
+    }
+  ],
+  showButtonIcons:true,
+  detailView: true,
     smartDisplay: true,
-    // pageSize: 8,
-    // pageList: [4,8,16],
     data: contactListTEMP,
     pagination: true,
     pageSize: 8, //your page size here
-    pageList: [25, 50, 75, 100]//list of page sizes
+    pageList: [25, 50, 75, 100],//list of page sizes
+    headerStyle: 'headerStyle',
+    rowStyle: 'rowStyle'
     
     
   })
@@ -353,44 +238,9 @@ function generateTable() {
   if(details){
     table.bootstrapTable('hideColumn', 'email')
     table.bootstrapTable('hideColumn', 'phoneNumber')
-    table.bootstrapTable('hideColumn', 'dateCreated')
   }
-  
 
-
-  // table.bootstrapTable('hideColumn', 'firstName')
- 
-
-
-
-
-  
-  
-  
-//   
-
-// let table = new DataTable('#contactList',{
-//   columns: [
-//       {  data: 'firstName', title: 'First Name', className: 'row-border hover',width: "10%"},
-//       { data: 'lastName', title: 'Last Name', className: 'row-border hover',width: "10%" },
-//       {data:'phoneNumber',  title:  'Phone Number', className: 'row-border hover',width: "25%"  },
-//       { data:'email', title:  'Email', className: 'row-border hover', width: "40%"},
-//       { data: 'dateCreated' ,title:  'Date Created', className: 'row-border hover', width: "15%", type: "date" }
-//   ],
-//   scrollCollapse: true,
-//   data : contactListTEMP,
-//   rowId: 'contact',
-//   scrollX: width,
-//   scrollY: height,
-//   paging: true,
-//   pageLength: 8,
-//   lengthMenu: [4,8,16],
-//   buttons: false,
-// });
-// fixDataTable()
-
-
-
+  // test()
   }
 
   function detailFormatter(index, row) {
@@ -416,64 +266,6 @@ function generateTable() {
     return html.join('')
   }
 
-function fixDataTable(){
-rows = document.getElementsByClassName("even")
-for(element of rows)
-{
-  element.setAttribute("onmouseover", "getContact(this);")
-  element.setAttribute("onclick", " location.href='expand.html'")
-}
-rowsOdd= document.getElementsByClassName("odd")
-for(element of rowsOdd)
-{
-  element.setAttribute("onmouseover", "getContact(this);")
-  element.setAttribute("onclick", " location.href='expand.html'")
-  
-}
-
-buttons = document.getElementsByClassName("paginate_button page-item ")
-for(element of buttons){
-  var temp = element.getAttribute("class")
-  var att = temp.concat(" bg-dark border border-3 border-primary")
-  element.setAttribute("class", att)
-}
-
-links = document.getElementsByClassName("page-link")
-for(element of buttons){
-  var temp = element.getAttribute("class")
-  var att = temp.concat(" text-white bg-dark border border-3 border-primary")
-  element.setAttribute("class",att )
-}
-
-select = document.getElementsByTagName("select")
-for(element of select){
-  var temp = element.getAttribute("style")
-  if(temp){
-    var att = temp.concat(" color:white")
-    element.setAttribute("class",att )
-  }
-  if(temp){
-    var att = temp.concat(" color:white")
-    element.setAttribute("class",att )
-  }
-
-  var tempB= element.getAttribute("class")
-  var attB = tempB.concat(" text-white")
-  element.setAttribute("class",attB)
-  element.setAttribute("data-bs-theme","dark" )
-}
-
-
-search = document.getElementsByTagName('input')
-for(element of buttons){
-  var temp = element.getAttribute("class")
-  var att = temp.concat(" bg-dark text-white")
-  element.setAttribute("class", att)
-  element.setAttribute("style", 'color:white!important')
-
-}
-
-}
 
 function populateFullScreen(){
 console.log(localStorage.getItem("firstName"))
@@ -505,5 +297,85 @@ function titleButFunEdit(){
   title = document.getElementsByTagName("title")
   for(i of title ){
     i.innerText =  "Edit ".concat(localStorage.getItem("firstName").concat(" ".concat(localStorage.getItem("lastName")) ) )
+  }
+}
+
+function headerStyle(column) {
+  return {
+    firstName: {
+      classes: 'p-0 m-0 border-0 text-break',
+      // css: {
+      //   ' font-size': '85%',
+      //   'column-width': '10%'
+      //  }
+    },
+    lastName: {
+      id: 'lName',
+      classes: 'p-0 m-0 border-0 text-break',
+      // css: {
+      //   ' font-size': '85%',
+      //   'column-width': '10%'
+      //  }
+    },
+    email: {
+      classes: 'p-0 m-0 border-0 text-break',
+      // css: {
+      //   ' font-size': '85%',
+      //   'column-width': '25%'
+      //  }
+    },
+    phoneNumber: {
+      classes: 'p-0 m-0 border-0 text-break',
+      
+    },
+    dateCreated: {
+      classes: 'p-0 m-0 border-0 text-break',
+      
+    },
+  }[column.field]
+}
+
+function cellStyle(value, row, index) {
+  return {
+    classes: 'px-0 m-0 border-top border-bottom border-0',
+    // css: {
+    //  ' font-size': '85%'
+    // }
+  }
+}
+
+function rowStyle(row, index) {
+ 
+  return {
+    // classes: 'p-0 m-0 border-0',
+    // css: {
+    //   'column-width': '7%',
+    //   'font-size': '75%',
+    //   color: 'blue'
+    // }
+  }
+}
+function buttons () {
+  return {
+    btnUsersAdd: {
+      text: 'Highlight Users',
+      icon: 'fa-users',
+      event: function () {
+        alert('Do some stuff to e.g. search all users which has logged in the last week')
+      },
+      attributes: {
+        title: 'Search all users which has logged in the last week'
+      }
+    },
+    btnAdd: {
+      text: 'Add new row',
+      icon: 'fa-plus',
+      event: function () {
+        alert('Do some stuff to e.g. add a new row')
+      },
+      attributes: {
+        title: 'Add a new row to the table'
+      }
+    }
   }
 }
