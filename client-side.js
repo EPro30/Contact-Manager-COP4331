@@ -171,10 +171,7 @@ localStorage.setItem("firstName", kids[0].innerText);
 }
 
   
-function generateTable() {
-
-  
-  console.log(window.innerWidth)
+function makeTable() {
   if(window.innerWidth < 800){
     details = true
   }
@@ -240,7 +237,6 @@ function generateTable() {
     table.bootstrapTable('hideColumn', 'phoneNumber')
   }
 
-  // test()
   }
 
   function detailFormatter(index, row) {
@@ -300,6 +296,15 @@ function titleButFunEdit(){
   }
 }
 
+function welcome(){
+  title = document.getElementById("welcomeCustom")
+  title.innerText = "Welcome "+ (firstName) + " " +  lastName +"!"
+}
+function titleButFunHome(){
+  title = document.getElementById("homeTitle")
+  title.innerText = (firstName) + " " +  lastName +"'s contacts"
+}
+
 function headerStyle(column) {
   return {
     firstName: {
@@ -344,38 +349,3 @@ function cellStyle(value, row, index) {
   }
 }
 
-function rowStyle(row, index) {
- 
-  return {
-    // classes: 'p-0 m-0 border-0',
-    // css: {
-    //   'column-width': '7%',
-    //   'font-size': '75%',
-    //   color: 'blue'
-    // }
-  }
-}
-function buttons () {
-  return {
-    btnUsersAdd: {
-      text: 'Highlight Users',
-      icon: 'fa-users',
-      event: function () {
-        alert('Do some stuff to e.g. search all users which has logged in the last week')
-      },
-      attributes: {
-        title: 'Search all users which has logged in the last week'
-      }
-    },
-    btnAdd: {
-      text: 'Add new row',
-      icon: 'fa-plus',
-      event: function () {
-        alert('Do some stuff to e.g. add a new row')
-      },
-      attributes: {
-        title: 'Add a new row to the table'
-      }
-    }
-  }
-}
