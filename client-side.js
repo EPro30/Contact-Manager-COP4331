@@ -171,7 +171,7 @@ localStorage.setItem("firstName", kids[0].innerText);
 }
 
   
-function makeTable() {
+function generateTable() {
   if(window.innerWidth < 800){
     details = true
   }
