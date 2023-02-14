@@ -172,70 +172,139 @@ localStorage.setItem("firstName", kids[0].innerText);
 
   
 function generateTable() {
-  if(window.innerWidth < 800){
-    details = true
-  }
- else{
-  details = false
-    
-  }
- 
-  var table = $('#contactList').bootstrapTable({
-    columns: [{
-      field: 'firstName',
-      title: 'First \n Name',
-      sortable: "True",
-      cellStyle: 'cellStyle',
-      dataVisible: "True"      
-    }, {
-      field: 'lastName',
-      title: 'Last \nName',
-      sortable: "True",
-      cellStyle: 'cellStyle',
-      dataVisible: "True"
-    }, {
-      field: 'phoneNumber',
-      title: 'Phone \n Number',
-      sortable: "True",
-      cellStyle: 'cellStyle',
-      dataVisible: "False"
-    },{
-      field: 'email',
-      title: 'Email',
-      sortable: "True",
-      cellStyle: 'cellStyle',
-      dataVisible: "False"
+    if(localStorage.getItem('pageSize') === null)
+    {
+      localStorage.setItem("pageSize", 8);
+      
     }
-  ],
-  showButtonIcons:true,
-  detailView: true,
-    smartDisplay: true,
-    data: contactListTEMP,
-    pagination: true,
-    pageSize: 8, //your page size here
-    pageList: [25, 50, 75, 100],//list of page sizes
-    headerStyle: 'headerStyle',
-    rowStyle: 'rowStyle'
+
+    // console.log(localStorage.getItem("pageSize"))
     
     
-  })
+      var table = $('#contactList').bootstrapTable({
+          columns: [{
+            field: 'firstName',
+            title: 'First Name',
+            sortable: true,
+            cellStyle: 'cellStyle'
+            //  ,
+            // visible: true   
+          }, {
+            field: 'lastName',
+            title: 'Last Name',
+            sortable: true,
+            cellStyle: 'cellStyle' 
+            // ,
+            // visible: true   
+          }, {
+            field: 'phoneNumber',
+            title: 'Phone Number',
+            sortable: "True",
+            cellStyle: 'cellStyle',
+            visible: false   
+            
+          },{
+            field: 'email',
+            title: 'Email',
+            sortable: "True",
+            cellStyle: 'cellStyle' 
+            // ,
+            // visible: false   
+          }
+        ],
+        showButtonIcons:true,
+        detailView: true,
+          smartDisplay: true,
+          data: contactListTEMP,
+          pagination: true,
+          pageSize: localStorage.getItem("pageSize"), //your page size here
+          pageList: [4, 8, 16, 24],//list of page sizes
+          headerStyle: 'headerStyle',
+          rowStyle: 'rowStyle',
+          onPageChange: function (number, size) {
+            drop = document.getElementsByClassName('dropdown-item active')[0].innerText
+             localStorage.setItem("pageSize", drop);
+          } 
+        
+      });
 
-  $("#contactList").on("click-row.bs.table", function (row, $el, field) {
-   console.log($el.firstName)
-    localStorage.setItem("firstName", $el.firstName);
-    localStorage.setItem("lastName", $el.lastName);
-    localStorage.setItem("email", $el.email);
-    localStorage.setItem("phoneNumber",$el.phoneNumber);
-    localStorage.setItem("dateCreated",$el.dateCreated);
-    window.location.href = "edit.html";
+      $("#contactList").on("click-row.bs.table", function (row, $el, field) {
+          console.log($el.firstName)
+            localStorage.setItem("firstName", $el.firstName);
+            localStorage.setItem("lastName", $el.lastName);
+            localStorage.setItem("email", $el.email);
+            localStorage.setItem("phoneNumber",$el.phoneNumber);
+            localStorage.setItem("dateCreated",$el.dateCreated);
+            window.location.href = "edit.html";
 
 
-  });
+      });
+    
+      // console.log((window.innerHeight/window.innerWidth))
+      // if((window.innerHeight/window.innerWidth) >= (371/319)){
+      //   table.bootstrapTable('hideColumn', 'email')
+      //   table.bootstrapTable('hideColumn', 'phoneNumber')
+      //   // console.log("minimize 1")
+      // } 
+      
+    
+    tab = document.getElementById("contactList")
+    tableWidth = tab.offsetWidth
+    tableHeight =  tab.offsetHeight
+    tableRatio = tableHeight/tableWidth
+    
 
-  if(details){
-    table.bootstrapTable('hideColumn', 'email')
-    table.bootstrapTable('hideColumn', 'phoneNumber')
-  }
+    // wider table = smaller number
+    if(localStorage.getItem('pageSize') == 4){
+      if((tableRatio) >= (166 / 622)) {
+            table.bootstrapTable('hideColumn', 'email')
+            // console.log("email hidden")
+        }
+      if((tableRatio) < (  166 / 475)) {
+              table.bootstrapTable('showColumn', 'phoneNumber')
+              // console.log("phone shown")
+        }
+
+    } 
+    else if(localStorage.getItem('pageSize') == 8){
+      if((tableRatio) >= (298 / 647)) {
+            table.bootstrapTable('hideColumn', 'email')
+            // console.log("email hidden")
+        }
+      if((tableRatio) < (  298 / 498)) {
+              table.bootstrapTable('showColumn', 'phoneNumber')
+              // console.log("phone shown")
+        }
+
+    }
+    else  if(localStorage.getItem('pageSize') == 16){
+      console.log("Test" )
+      if((tableRatio) > ( 560 / 862)) {
+            table.bootstrapTable('hideColumn', 'email')
+            console.log("email hidden")
+        }
+      if((tableRatio) <=( 560 / 622)) {
+              table.bootstrapTable('showColumn', 'phoneNumber')
+              console.log("phone shown")
+        }
+
+    }
+    else if(localStorage.getItem('pageSize') == 24){
+      table.bootstrapTable('showColumn', 'phoneNumber')
+      console.log("Test" )
+      if((tableRatio) > ( 822 / 862)) {
+            table.bootstrapTable('hideColumn', 'email')
+            console.log("email hidden")
+        }
+      if((tableRatio) >=( 822 / 498)) {
+        table.bootstrapTable('hideColumn', 'phoneNumber')
+              console.log("phone shown")
+        }
+
+    }
+
+    
+
 
   }
 
@@ -263,13 +332,15 @@ function generateTable() {
   }
 
 
+
+
 function populateFullScreen(){
-console.log(localStorage.getItem("firstName"))
-document.getElementById("displayFirst").innerText =  localStorage.getItem("firstName");
-document.getElementById("displayLast").innerText =localStorage.getItem("lastName");
-document.getElementById("displayEmail").innerText =localStorage.getItem("email");
-document.getElementById("displayPhone").innerText = localStorage.getItem("phoneNumber");
-document.getElementById("displayDate").innerText = localStorage.getItem("dateCreated");
+    console.log(localStorage.getItem("firstName"))
+    document.getElementById("displayFirst").innerText =  localStorage.getItem("firstName");
+    document.getElementById("displayLast").innerText =localStorage.getItem("lastName");
+    document.getElementById("displayEmail").innerText =localStorage.getItem("email");
+    document.getElementById("displayPhone").innerText = localStorage.getItem("phoneNumber");
+    document.getElementById("displayDate").innerText = localStorage.getItem("dateCreated");
 
 }
 
