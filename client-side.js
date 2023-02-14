@@ -219,12 +219,10 @@ function generateTable() {
           pagination: true,
           pageSize: localStorage.getItem("pageSize"), //your page size here
           pageList: [4, 8, 16, 24],//list of page sizes
-          headerStyle: 'headerStyle',
-          rowStyle: 'rowStyle',
           onPageChange: function (number, size) {
             drop = document.getElementsByClassName('dropdown-item active')[0].innerText
              localStorage.setItem("pageSize", drop);
-          } 
+          }
         
       });
 
@@ -240,20 +238,13 @@ function generateTable() {
 
       });
     
-      // console.log((window.innerHeight/window.innerWidth))
-      // if((window.innerHeight/window.innerWidth) >= (371/319)){
-      //   table.bootstrapTable('hideColumn', 'email')
-      //   table.bootstrapTable('hideColumn', 'phoneNumber')
-      //   // console.log("minimize 1")
-      // } 
-      
-    
+    // logic to make the table more responsive
     tab = document.getElementById("contactList")
     tableWidth = tab.offsetWidth
     tableHeight =  tab.offsetHeight
     tableRatio = tableHeight/tableWidth
     
-
+    console.log(String(tableHeight), '/', String(tableWidth))
     // wider table = smaller number
     if(localStorage.getItem('pageSize') == 4){
       if((tableRatio) >= (166 / 622)) {
@@ -271,7 +262,7 @@ function generateTable() {
             table.bootstrapTable('hideColumn', 'email')
             // console.log("email hidden")
         }
-      if((tableRatio) < (  298 / 498)) {
+      if((tableRatio) < (  298 / 509)) {
               table.bootstrapTable('showColumn', 'phoneNumber')
               // console.log("phone shown")
         }
@@ -281,11 +272,11 @@ function generateTable() {
       console.log("Test" )
       if((tableRatio) > ( 560 / 862)) {
             table.bootstrapTable('hideColumn', 'email')
-            console.log("email hidden")
+            // console.log("email hidden")
         }
       if((tableRatio) <=( 560 / 622)) {
               table.bootstrapTable('showColumn', 'phoneNumber')
-              console.log("phone shown")
+              // console.log("phone shown")
         }
 
     }
@@ -376,47 +367,47 @@ function titleButFunHome(){
   title.innerText = (firstName) + " " +  lastName +"'s contacts"
 }
 
-function headerStyle(column) {
-  return {
-    firstName: {
-      classes: 'p-0 m-0 border-0 text-break',
-      // css: {
-      //   ' font-size': '85%',
-      //   'column-width': '10%'
-      //  }
-    },
-    lastName: {
-      id: 'lName',
-      classes: 'p-0 m-0 border-0 text-break',
-      // css: {
-      //   ' font-size': '85%',
-      //   'column-width': '10%'
-      //  }
-    },
-    email: {
-      classes: 'p-0 m-0 border-0 text-break',
-      // css: {
-      //   ' font-size': '85%',
-      //   'column-width': '25%'
-      //  }
-    },
-    phoneNumber: {
-      classes: 'p-0 m-0 border-0 text-break',
+// function headerStyle(column) {
+//   return {
+//     firstName: {
+//       classes: 'p-0 m-0 border-0 text-break',
+//       // css: {
+//       //   ' font-size': '85%',
+//       //   'column-width': '10%'
+//       //  }
+//     },
+//     lastName: {
+//       id: 'lName',
+//       classes: 'p-0 m-0 border-0 text-break',
+//       // css: {
+//       //   ' font-size': '85%',
+//       //   'column-width': '10%'
+//       //  }
+//     },
+//     email: {
+//       classes: 'p-0 m-0 border-0 text-break',
+//       // css: {
+//       //   ' font-size': '85%',
+//       //   'column-width': '25%'
+//       //  }
+//     },
+//     phoneNumber: {
+//       classes: 'p-0 m-0 border-0 text-break',
       
-    },
-    dateCreated: {
-      classes: 'p-0 m-0 border-0 text-break',
+//     },
+//     dateCreated: {
+//       classes: 'p-0 m-0 border-0 text-break',
       
-    },
-  }[column.field]
-}
+//     },
+//   }[column.field]
+// }
 
-function cellStyle(value, row, index) {
-  return {
-    classes: 'px-0 m-0 border-top border-bottom border-0',
-    // css: {
-    //  ' font-size': '85%'
-    // }
-  }
-}
+// function cellStyle(value, row, index) {
+//   return {
+//     classes: 'px-0 m-0 border-top border-bottom border-0',
+//     // css: {
+//     //  ' font-size': '85%'
+//     // }
+//   }
+// }
 
