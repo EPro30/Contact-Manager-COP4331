@@ -229,6 +229,7 @@ function generateTable() {
           pagination: true,
           pageSize: localStorage.getItem("pageSize"), //your page size here
           pageList: [4, 8, 16, 24],//list of page sizes
+          headerStyle: 'headerStyle',
           onPageChange: function (number, size) {
             drop = document.getElementsByClassName('dropdown-item active')[0]
              localStorage.setItem("pageSize", drop);
@@ -306,66 +307,6 @@ function generateTable() {
     }
       
     
-    // // logic to make the table more responsive
-    // tab = document.getElementById("contactList")
-    // tableWidth = tab.offsetWidth
-    // tableHeight =  tab.offsetHeight
-    // tableRatio = tableHeight/tableWidth
-    // console.log( table.bootstrapTable('getData').length)
-    
-    // console.log(String(tableHeight), '/', String(tableWidth))
-    // // wider table = smaller number
-    // if((localStorage.getItem('pageSize') == 4) || (table.bootstrapTable('getData').length <5 ) ){
-    //   if((tableRatio) >= (166 / 622)) {
-    //         table.bootstrapTable('hideColumn', 'email')
-    //         // console.log("email hidden")
-    //     }
-    //   if((tableRatio) < (  166 / 475)) {
-    //           table.bootstrapTable('showColumn', 'phoneNumber')
-    //           // console.log("phone shown")
-    //     }
-
-    // } 
-    // else if(localStorage.getItem('pageSize') == 8){
-    //   if((tableRatio) >= (298 / 647)) {
-    //         table.bootstrapTable('hideColumn', 'email')
-    //         // console.log("email hidden")
-    //     }
-    //   if((tableRatio) < (  298 / 509)) {
-    //           table.bootstrapTable('showColumn', 'phoneNumber')
-    //           // console.log("phone shown")
-    //     }
-
-    // }
-    // else  if(localStorage.getItem('pageSize') == 16){
-    //   console.log("Test" )
-    //   if((tableRatio) > ( 560 / 862)) {
-    //         table.bootstrapTable('hideColumn', 'email')
-    //         // console.log("email hidden")
-    //     }
-    //   if((tableRatio) <=( 560 / 622)) {
-    //           table.bootstrapTable('showColumn', 'phoneNumber')
-    //           // console.log("phone shown")
-    //     }
-
-    // }
-    // else if(localStorage.getItem('pageSize') == 24){
-    //   table.bootstrapTable('showColumn', 'phoneNumber')
-    //   console.log("Test" )
-    //   if((tableRatio) > ( 822 / 862)) {
-    //         table.bootstrapTable('hideColumn', 'email')
-    //         console.log("email hidden")
-    //     }
-    //   if((tableRatio) >=( 822 / 498)) {
-    //     table.bootstrapTable('hideColumn', 'phoneNumber')
-    //           console.log("phone shown")
-    //     }
-
-    // }
-
-    
-
-
   }
 
   function detailFormatter(index, row) {
@@ -436,47 +377,47 @@ function titleButFunHome(){
   title.innerText = (firstName) + " " +  lastName +"'s contacts"
 }
 
-// function headerStyle(column) {
-//   return {
-//     firstName: {
-//       classes: 'p-0 m-0 border-0 text-break',
-//       // css: {
-//       //   ' font-size': '85%',
-//       //   'column-width': '10%'
-//       //  }
-//     },
-//     lastName: {
-//       id: 'lName',
-//       classes: 'p-0 m-0 border-0 text-break',
-//       // css: {
-//       //   ' font-size': '85%',
-//       //   'column-width': '10%'
-//       //  }
-//     },
-//     email: {
-//       classes: 'p-0 m-0 border-0 text-break',
-//       // css: {
-//       //   ' font-size': '85%',
-//       //   'column-width': '25%'
-//       //  }
-//     },
-//     phoneNumber: {
-//       classes: 'p-0 m-0 border-0 text-break',
+function headerStyle(column) {
+  return {
+    firstName: {
+      classes: 'p-0 m-0 border-0 text-break',
+      // css: {
+      //   ' font-size': '85%',
+      //   'column-width': '10%'
+      //  }
+    },
+    lastName: {
+      id: 'lName',
+      classes: 'p-0 m-0 border-0 text-break',
+      // css: {
+      //   ' font-size': '85%',
+      //   'column-width': '10%'
+      //  }
+    },
+    email: {
+      classes: 'p-0 m-0 border-0 text-break',
+      // css: {
+      //   ' font-size': '85%',
+      //   'column-width': '25%'
+      //  }
+    },
+    phoneNumber: {
+      classes: 'p-0 m-0 border-0 text-break',
       
-//     },
-//     dateCreated: {
-//       classes: 'p-0 m-0 border-0 text-break',
+    },
+    dateCreated: {
+      classes: 'p-0 m-0 border-0 text-break',
       
-//     },
-//   }[column.field]
-// }
+    },
+  }[column.field]
+}
 
-// function cellStyle(value, row, index) {
-//   return {
-//     classes: 'px-0 m-0 border-top border-bottom border-0',
-//     // css: {
-//     //  ' font-size': '85%'
-//     // }
-//   }
-// }
+function cellStyle(value, row, index) {
+  return {
+    classes: 'px-0 m-0 border-top border-bottom border-0',
+    // css: {
+    //  ' font-size': '85%'
+    // }
+  }
+}
 
