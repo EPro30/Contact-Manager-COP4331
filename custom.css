@@ -1,0 +1,7 @@
+:root {
+    --colorB: #1e90ff;
+    --colorA: #ffffff; 
+    --mainColor: #ffffff; 
+    --bg: radial-gradient(var(colorA), var(colorB) ); 
+    --fontSize: 16px;
+  }

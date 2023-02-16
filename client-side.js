@@ -192,18 +192,25 @@ function generateTable() {
     
     
       var table = $('#contactList').bootstrapTable({
-          columns: [{
+          columns: [
+            // {
+            //   field: 'state',
+            //   checkbox: true,
+            // },
+            {
             field: 'firstName',
             title: 'First Name',
             sortable: true,
-            cellStyle: 'cellStyle'
+            cellStyle: 'cellStyle',
+            align: 'center'
             //  ,
             // visible: true   
           }, {
             field: 'lastName',
             title: 'Last Name',
             sortable: true,
-            cellStyle: 'cellStyle' 
+            cellStyle: 'cellStyle',
+            align: 'center'
             // ,
             // visible: true   
           }, {
@@ -211,25 +218,38 @@ function generateTable() {
             title: 'Phone Number',
             sortable: "True",
             cellStyle: 'cellStyle',
+            align: 'center',
             // visible: false   
             
           },{
             field: 'email',
             title: 'Email',
             sortable: "True",
-            cellStyle: 'cellStyle' 
+            cellStyle: 'cellStyle' ,
+            align: 'center'
             // ,
             // visible: false   
           }
+          // , {
+          //   field: 'operate',
+          //   title: 'Item Operate',
+          //   align: 'center',
+          //   clickToSelect: false,
+          //   events: window.operateEvents,
+          //   formatter: operateFormatter
+          // }
         ],
+        clickToSelect: true,
         showButtonIcons:true,
         detailView: true,
+        showExport: true,
           smartDisplay: true,
           data: contactListTEMP,
           pagination: true,
           pageSize: localStorage.getItem("pageSize"), //your page size here
           pageList: [4, 8, 16, 24],//list of page sizes
           headerStyle: 'headerStyle',
+          // toolbar:"#toolbar",
           onPageChange: function (number, size) {
             drop = document.getElementsByClassName('dropdown-item active')[0]
              localStorage.setItem("pageSize", drop);
@@ -245,64 +265,65 @@ function generateTable() {
             localStorage.setItem("phoneNumber",$el.phoneNumber);
             localStorage.setItem("dateCreated",$el.dateCreated);
             window.location.href = "edit.html";
-
-
       });
 
-      // logic to make the table more responsive
-    tab = document.getElementById("contactList")
-    tableWidth = tab.offsetWidth
-    tableHeight =  tab.offsetHeight
-    tableRatio = tableHeight/tableWidth
-    
-    console.log(String(tableHeight), '/', String(tableWidth))
-    // wider table = smaller number
-    if((localStorage.getItem('pageSize') == 4) || (table.bootstrapTable('getData').length <=8 ) ){
-      // table.bootstrapTable('showColumn', 'phoneNumber');
-      if((tableRatio) >= (232 / 658)) {
-            table.bootstrapTable('hideColumn', 'email');
-            console.log("email hidden")
-        }
-      if((tableRatio) < (232 / 862)) {
-        table.bootstrapTable('hideColumn', 'phoneNumber');
-              console.log("phone hidden")
-        }
+      
+      
 
-    } 
-    else if(localStorage.getItem('pageSize') == 8){
-      if((tableRatio) >= (298 / 647)) {
-            table.bootstrapTable('hideColumn', 'email');
-            // console.log("email hidden")
-        }
-      if((tableRatio) >= (  298 / 509)) {
+    // logic to make the table more responsive
+          tab = document.getElementById("contactList")
+          tableWidth = tab.offsetWidth
+          tableHeight =  tab.offsetHeight
+          tableRatio = tableHeight/tableWidth
+          
+          console.log(String(tableHeight), '/', String(tableWidth))
+          // wider table = smaller number
+          if((localStorage.getItem('pageSize') == 4) || (table.bootstrapTable('getData').length <=8 ) ){
+            // table.bootstrapTable('showColumn', 'phoneNumber');
+            if((tableRatio) >= (232 / 658)) {
+                  table.bootstrapTable('hideColumn', 'email');
+                  console.log("email hidden")
+              }
+            if((tableRatio) < (232 / 862)) {
               table.bootstrapTable('hideColumn', 'phoneNumber');
-              // console.log("phone shown")
-        }
+                    console.log("phone hidden")
+              }
 
-    }
-    else  if(localStorage.getItem('pageSize') == 16){
-      console.log("Test" )
-      if((tableRatio) > ( 560 / 862)) {
-            table.bootstrapTable('hideColumn', 'email');
-            // console.log("email hidden")
-        }
-      if((tableRatio) >( 560 / 622)) {
+          } 
+          else if(localStorage.getItem('pageSize') == 8){
+            if((tableRatio) >= (298 / 663)) {
+                  table.bootstrapTable('hideColumn', 'email');
+                  // console.log("email hidden")
+              }
+            if((tableRatio) >= (  298 / 509)) {
+                    table.bootstrapTable('hideColumn', 'phoneNumber');
+                    // console.log("phone shown")
+              }
+
+          }
+          else  if(localStorage.getItem('pageSize') == 16){
+            console.log("Test" )
+            if((tableRatio) > ( 560 / 862)) {
+                  table.bootstrapTable('hideColumn', 'email');
+                  // console.log("email hidden")
+              }
+            if((tableRatio) >( 560 / 622)) {
+                    table.bootstrapTable('hideColumn', 'phoneNumber');
+                    // console.log("phone shown")
+              }
+
+          }
+          else if(localStorage.getItem('pageSize') == 24){
+            table.bootstrapTable('showColumn', 'phoneNumber');
+            console.log("Test" );
+            if((tableRatio) > ( 822 / 862)) {
+                  table.bootstrapTable('hideColumn', 'email');
+                  console.log("email hidden");
+              }
+            if((tableRatio) <=( 822 / 498)) {
               table.bootstrapTable('hideColumn', 'phoneNumber');
-              // console.log("phone shown")
-        }
-
-    }
-    else if(localStorage.getItem('pageSize') == 24){
-      table.bootstrapTable('showColumn', 'phoneNumber');
-      console.log("Test" );
-      if((tableRatio) > ( 822 / 862)) {
-            table.bootstrapTable('hideColumn', 'email');
-            console.log("email hidden");
-        }
-      if((tableRatio) <=( 822 / 498)) {
-        table.bootstrapTable('hideColumn', 'phoneNumber');
-              console.log("phone shown");
-        }
+                    console.log("phone shown");
+              }
 
     }
       
@@ -311,6 +332,7 @@ function generateTable() {
 
   function detailFormatter(index, row) {
     var html = []
+    html.push('<div class= "mx-auto justify-content-center"><div>')
     $.each(row, function (key, value) {
       if(key == 'firstName'){
         html.push('<p><b>' + 'First Name' + ':</b> ' + value + '</p>')
@@ -329,6 +351,7 @@ function generateTable() {
       }
       
     })
+    html.push('</div></div>')
     return html.join('')
   }
 
@@ -408,6 +431,9 @@ function headerStyle(column) {
     dateCreated: {
       classes: 'p-0 m-0 border-0 text-break',
       
+    },operate: {
+      classes: 'p-0 m-0 border-0 text-break',
+      
     },
   }[column.field]
 }
@@ -420,4 +446,115 @@ function cellStyle(value, row, index) {
     // }
   }
 }
+function operateFormatter(value, row, index) {
+  return [
+    '<a class="like" href="javascript:void(0)" title="Like">',
+    '<i class="fa fa-heart"></i>',
+    '</a>  ',
+    '<a class="remove" href="javascript:void(0)" title="Remove">',
+    '<i class="fa fa-trash"></i>',
+    '</a>'
+  ].join('')
+}
 
+window.operateEvents = {
+  'click .like': function (e, value, row, index) {
+    alert('You click like action, row: ' + JSON.stringify(row))
+  },
+  'click .remove': function (e, value, row, index) {
+    $table.bootstrapTable('remove', {
+      field: 'id',
+      values: [row.id]
+    })
+  }
+}
+
+
+
+function styling(){
+  
+  // root = document.querySelector(':root')
+  // rootStyle = getComputedStyle(root).getPropertyValue('--colorA')
+  // bg = rootStyle.getPropertyValue('--bg')
+  // console.log(rootStyle)
+  styleSheet = document.getElementById('custom')
+  // colors
+  mainColor = localStorage.getItem("mainColor")
+  colorA = localStorage.getItem("colorA")
+  colorB = localStorage.getItem("colorB")
+  colorC = localStorage.getItem("colorC")
+  dyslexicFont =  localStorage.getItem("dyslexicFont")
+  // colorC = localStorage.getItem("colorC")
+  style = []
+  styleBg = ("radial-gradient(" + String(colorA) + ","+String(colorB) + ")" );
+  bg = document.getElementsByClassName("bg-primary")
+  // console.log(bg.length)
+  for( element of bg){
+    element.style.background = styleBg;
+    // element.setAttribute("style", (" background: " + styleBg ));
+    // console.log( element.getAttribute("style"))
+  }
+  btn = document.getElementsByClassName("btn-outline-primary");
+  for( element of btn){
+    // element.style.color = styleBg
+    const list = element.classList;
+    list.add("btn-gradient");
+
+    // console.log( element.getAttribute("style"))
+  }
+  bgDark = document.getElementsByClassName("bg-dark")
+  // console.log(bg.length)
+  console.log(bgDark.length)
+  for( element of bgDark){
+    element.style.background = mainColor;
+    // element.setAttribute("style", (" background: " + styleBg ));
+    // console.log( element.getAttribute("style"))
+  }
+  text = document.getElementsByClassName("gradient-text");
+  for( element of text){
+    element.style.backgroundImage =  ("linear-gradient(" + String(colorA) + ","+String(colorB) + ")" );
+ 
+  }
+  gradientstopA = document.getElementsByClassName("iconA")
+  for( element of gradientstopA){
+    element.setAttribute("stop-color",colorA)
+  }
+  gradientstopB = document.getElementsByClassName("iconB")
+  for( element of gradientstopB){
+    element.setAttribute("stop-color",colorB)
+  }
+
+  active = document.getElementsByClassName("page-item active")
+  for( element of active){
+    element.setAttribute("style", (" background: " + styleBg ));
+  }
+
+}
+
+function getLook(){
+  // card color
+  let mainColor = document.getElementById("mainColor").value;
+  localStorage.setItem('mainColor', mainColor)
+// gradient
+  let colorA = document.getElementById("colorA").value;
+  localStorage.setItem('colorA', colorA)
+  let colorB = document.getElementById("colorB").value;
+  localStorage.setItem('colorB', colorB)
+// fontsize
+  let fontSize = document.forms["looks"]["fontSize"].value;
+  localStorage.setItem('fontSize', fontSize)
+// font
+  let dyslexicFont = document.forms["looks"]["dyslexicFont"].value;
+  localStorage.setItem('dyslexicFont', dyslexicFont)
+}
+
+function setIntialColors()
+{
+  // console.log(localStorage.getItem("mainColor"))
+  document.getElementById("mainColor").setAttribute("value", String(localStorage.getItem("mainColor")))
+  document.getElementById("colorA").setAttribute("value", localStorage.getItem("colorA"))
+  document.getElementById("colorB").setAttribute("value", localStorage.getItem("colorB"))
+  document.getElementById("dyslexicFont").setAttribute("value", localStorage.getItem("dyslexicFont"))
+  document.getElementById("fontSize").setAttribute("fontSize", localStorage.getItem("fontSize"))
+
+}
