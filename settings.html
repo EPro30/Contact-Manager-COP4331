@@ -1,0 +1,142 @@
+<html>
+	<head>
+		<title>Settings</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+		<script src ="client-side.js"></script>
+		
+		<!-- <script>
+			let loaded = sessionStorage.getItem("loaded");
+			if (!loaded)
+			{
+				sessionStorage.setItem("fontSize", 16);
+				sessionStorage.setItem("loaded", true);
+				console.log(loaded);
+			}
+			
+			function increaseFontSize() {
+				txt = document.getElementsByClassName('sampletext');
+				console.log(txt);
+				style = window.getComputedStyle(txt[0], null).getPropertyValue('font-size');
+				currentSize = parseFloat(style);
+				console.log(currentSize);
+				if (currentSize >= 32)
+				{
+					return;
+				}
+				
+				else
+				{
+					currentSize = currentSize + 4;
+					for (let i = 0; i < txt.length; ++i)
+					{
+						style = window.getComputedStyle(txt[i], null).getPropertyValue('font-size');
+						txt[i].style.fontSize = (currentSize) + 'px';
+					}
+					sessionStorage.setItem("fontSize", currentSize);
+					console.log(sessionStorage.getItem("fontSize"));
+					document.getElementById("selectFontSize").innerHTML = "Font: " + currentSize + "px";
+				}
+			}
+			
+			function decreaseFontSize() {
+				txt = document.getElementsByClassName('sampletext');
+				console.log(txt);
+				style = window.getComputedStyle(txt[0], null).getPropertyValue('font-size');
+				currentSize = parseFloat(style);
+				console.log(currentSize);
+				if (currentSize <= 20)
+				{
+					return;
+				}
+				
+				else
+				{
+					currentSize = currentSize - 4;
+					for (let i = 0; i < txt.length; ++i)
+					{
+						style = window.getComputedStyle(txt[i], null).getPropertyValue('font-size');
+						txt[i].style.fontSize = (currentSize) + 'px';
+					}
+					sessionStorage.setItem("fontSize", currentSize);
+					console.log(sessionStorage.getItem("fontSize"));
+					document.getElementById("selectFontSize").innerHTML = "Font: " + currentSize + "px";
+				}
+			}
+			
+			function setFontSize() 
+			{
+				if (!loaded)
+				{
+					return;
+				}
+				
+				else
+				{
+					let selectedFont = sessionStorage.getItem("fontSize");
+					txt = document.getElementsByClassName('sampletext');
+					for (let i = 0; i < txt.length; ++i)
+					{
+						style = window.getComputedStyle(txt[i], null).getPropertyValue('font-size');
+						txt[i].style.fontSize = (selectedFont) + 'px';
+					}
+					document.getElementById("selectFontSize").innerHTML = "Font: " + selectedFont + "px";
+				}
+			}
+		</script> -->
+		
+	</head>
+	<body onload = "setFontSize();" class="bg-primary">
+		<div class = "p-3 m-5">
+		</div>
+		<div class="container h-75 d-flex align-items-center justify-content-center">
+        
+        <div class="row pt-3">
+
+            <div class="card-sm bg-dark w-100 rounded-5">
+                <div class="card-body-sm bg-dark rounded-5">
+				<div class="container-fluid flex-start p-2 m-2">
+						<button type="button" class="btn btn-outline-primary rounded-pill mt-1" onclick="location.href='contactList.html'">
+							←
+						</button>
+					</div>
+                    <div class="col-sm|md|lg|xl|xxl-8 m-5 text-white text-center align-self-center"  style="display: block;">
+                <div class="card-body-sm bg-dark">
+                    <div class="col--8 p-2 m-5 text-white text-center align-self-center">
+                        <h1 class="siteFont display-5 p-3 gap-1 mx-5">
+                            Settings
+                        </h1>
+
+                        <div class="gap-3">
+							<div>
+								<h3 class = "siteFont">
+									Change Font Size
+								</h3>
+							</div>
+                            <button type="button" class="btn btn-outline-primary btn-block rounded-pill m-3" alt="Increase Font Size" onclick = "increaseFontSize();">
+                                Increase Font Size
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-block rounded-pill" alt="Decrease Font Size" onclick = "decreaseFontSize();">
+                                Decrease Font Size
+                            </button>
+							<p id = "siteFont" class = "siteFont">
+								Sample Text
+							</p>
+							<p class = "siteFont" id = "selectFontSize">
+								Font: 16px
+							</p>
+                          </div>
+                    </div>
+                </div>
+              </div>
+            
+          </div>
+          
+    </div>
+        
+    </div>
+	</body>
+</html>
