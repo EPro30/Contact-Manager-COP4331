@@ -176,10 +176,31 @@
 		);
 		});
 
+    // Change the submit button error or email error
+    // if the user tries to input username
 		usernameTextField.addEventListener("focus", function () {
 		const targetElement = document.getElementById("emailError");
 		if (targetElement.style.display === "block") {
 		  targetElement.style.display = "none";
+		}
+   
+    const targetSubmitButtonError = document.getElementById("submitButtonError");
+    if (targetSubmitButtonError.style.display === "block") {
+		  targetSubmitButtonError.style.display = "none";
+		}
+		});
+   
+   // Change the submit button error or password error
+   // if the user tries to input password
+   passwordTextField.addEventListener("focus", function () {
+		const targetElement = document.getElementById("passwordError");
+		if (targetElement.style.display === "block") {
+		  targetElement.style.display = "none";
+		}
+   
+    const targetSubmitButtonError = document.getElementById("submitButtonError");
+    if (targetSubmitButtonError.style.display === "block") {
+		  targetSubmitButtonError.style.display = "none";
 		}
 		});
 
@@ -187,7 +208,7 @@
 		function prepLogin() {
 		const targetElement = document.getElementById("submitButtonError");
 		if (checkIsInvalidFeedback()) {
-		  targetElement.innerHTML = "Please fix the errors before submitting.";
+		  targetElement.innerHTML = "Please enter valid login credentials.";
 		  targetElement.style.display = "block";
 		} else if (checkAllEmptyFields()) {
 		  targetElement.innerHTML =
@@ -214,7 +235,9 @@
 		  }
 		}
 		return false;
-		}  
+		} 
+    
+     
       </script>
   
 </html>
