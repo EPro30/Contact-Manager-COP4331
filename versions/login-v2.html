@@ -108,7 +108,34 @@
                   Login
                 </button>
                 <div id="submitButtonError" class="invalid-feedback"></div>
-                </div>                
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-block rounded-pill mb-3 mt-4"
+                  onclick="resetEmail();"
+                >
+                  Forgot Pasword
+                </button>
+                <div  style="display:none" id = "resetEmail"  class = "p-3 mb-3">
+                    <label for="resetEmail" class="form-label text-primary"
+                    >Email:
+                  </label>
+                  <input
+                    type="resetEmail"
+                    class="form-control  rounded-pill p-2"
+                    id="email"
+                    placeholder="Enter username"
+                    name="email"
+                  />
+ <!--  Needs stuff from the api-->
+                  <button
+                  type="button"
+                  class="btn btn-outline-primary btn-block rounded-pill mb-5 mt-4"
+                  onclick="location.href='resetPassword.html'"
+                >
+                  Send Key
+                </button>
+                 
                 </div>
                
               </form>
@@ -149,31 +176,10 @@
 		);
 		});
 
-    // Change the submit button error or email error
-    // if the user tries to input username
 		usernameTextField.addEventListener("focus", function () {
 		const targetElement = document.getElementById("emailError");
 		if (targetElement.style.display === "block") {
 		  targetElement.style.display = "none";
-		}
-   
-    const targetSubmitButtonError = document.getElementById("submitButtonError");
-    if (targetSubmitButtonError.style.display === "block") {
-		  targetSubmitButtonError.style.display = "none";
-		}
-		});
-   
-   // Change the submit button error or password error
-   // if the user tries to input password
-   passwordTextField.addEventListener("focus", function () {
-		const targetElement = document.getElementById("passwordError");
-		if (targetElement.style.display === "block") {
-		  targetElement.style.display = "none";
-		}
-   
-    const targetSubmitButtonError = document.getElementById("submitButtonError");
-    if (targetSubmitButtonError.style.display === "block") {
-		  targetSubmitButtonError.style.display = "none";
 		}
 		});
 
@@ -181,7 +187,7 @@
 		function prepLogin() {
 		const targetElement = document.getElementById("submitButtonError");
 		if (checkIsInvalidFeedback()) {
-		  targetElement.innerHTML = "Please enter valid login credentials.";
+		  targetElement.innerHTML = "Please fix the errors before submitting.";
 		  targetElement.style.display = "block";
 		} else if (checkAllEmptyFields()) {
 		  targetElement.innerHTML =
@@ -208,9 +214,7 @@
 		  }
 		}
 		return false;
-		} 
-    
-     
+		}  
       </script>
   
 </html>

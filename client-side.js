@@ -227,7 +227,17 @@ function generateTable() {
             sortable: "True",
             cellStyle: 'cellStyle' ,
             align: 'center'
+            // ,
+            // visible: false   
           }
+          // , {
+          //   field: 'operate',
+          //   title: 'Item Operate',
+          //   align: 'center',
+          //   clickToSelect: false,
+          //   events: window.operateEvents,
+          //   formatter: operateFormatter
+          // }
         ],
         clickToSelect: true,
         showButtonIcons:true,
@@ -243,11 +253,6 @@ function generateTable() {
           onPageChange: function (number, size) {
             drop = document.getElementsByClassName('dropdown-item active')[0]
              localStorage.setItem("pageSize", drop);
-             styling()
-          },
-          onSort: function (name, order) {
-        
-             styling()
           }
         
       });
@@ -327,9 +332,6 @@ function generateTable() {
 
   function detailFormatter(index, row) {
     var html = []
-    
-    
-  
     html.push('<div class= "mx-auto justify-content-center"><div>')
     $.each(row, function (key, value) {
       if(key == 'firstName'){
@@ -470,78 +472,62 @@ window.operateEvents = {
 
 
 function styling(){
-   r = document.querySelector(':root')
-   rs = getComputedStyle(r);
   
-
-  
-  // styleSheet = document.getElementById('custom')
+  // root = document.querySelector(':root')
+  // rootStyle = getComputedStyle(root).getPropertyValue('--colorA')
+  // bg = rootStyle.getPropertyValue('--bg')
+  // console.log(rootStyle)
+  styleSheet = document.getElementById('custom')
   // colors
   mainColor = localStorage.getItem("mainColor")
   colorA = localStorage.getItem("colorA")
   colorB = localStorage.getItem("colorB")
+  colorC = localStorage.getItem("colorC")
   dyslexicFont =  localStorage.getItem("dyslexicFont")
+  // colorC = localStorage.getItem("colorC")
   style = []
   styleBg = ("radial-gradient(" + String(colorA) + ","+String(colorB) + ")" );
- 
-  r.style.setProperty('--colorA', colorA)
-  r.style.setProperty('--colorB', colorB)
-  r.style.setProperty('--bg', styleBg)
-  console.log(dyslexicFont)
-  if(dyslexicFont == 'true'){
-    body = document.getElementsByTagName("body");
-        for( element of body){
-          const list = element.classList;
-          list.add("access") 
-        }
-  }
-  else{
-    body = document.getElementsByTagName("body");
-        for( element of body){
-          const list = element.classList;
-          list.remove("access") 
-        }
-  }
-  
-  
-
-  
-  // gradientstopA = document.getElementsByClassName("iconA")
-  // for( element of gradientstopA){
-  //   element.setAttribute("stop-color",colorA)
-  // }
-  // gradientstopB = document.getElementsByClassName("iconB")
-  // for( element of gradientstopB){
-  //   element.setAttribute("stop-color",colorB)
-  // }
-
-
-  
-
-}
-
-function btnHover(){
-  mainColor = localStorage.getItem("mainColor")
-  colorA = localStorage.getItem("colorA")
-  colorB = localStorage.getItem("colorB")
-  dyslexicFont =  localStorage.getItem("dyslexicFont")
-  styleBg = ("radial-gradient(" + String(colorA) + ","+String(colorB) + ")" );
-
-  gradientstopA = document.getElementsByClassName("iconA")
-  for( element of gradientstopA){
-    element.setAttribute("stop-color",'white')
-  }
-  gradientstopB = document.getElementsByClassName("iconB")
-  for( element of gradientstopB){
-    element.setAttribute("stop-color",'white')
+  bg = document.getElementsByClassName("bg-primary")
+  // console.log(bg.length)
+  for( element of bg){
+    element.style.background = styleBg;
+    // element.setAttribute("style", (" background: " + styleBg ));
+    // console.log( element.getAttribute("style"))
   }
   btn = document.getElementsByClassName("btn-outline-primary");
   for( element of btn){
-    element.style.background = styleBg;
+    // element.style.color = styleBg
+    const list = element.classList;
+    list.add("btn-gradient");
+
+    // console.log( element.getAttribute("style"))
+  }
+  bgDark = document.getElementsByClassName("bg-dark")
+  // console.log(bg.length)
+  console.log(bgDark.length)
+  for( element of bgDark){
+    element.style.background = mainColor;
+    // element.setAttribute("style", (" background: " + styleBg ));
+    // console.log( element.getAttribute("style"))
+  }
+  text = document.getElementsByClassName("gradient-text");
+  for( element of text){
+    element.style.backgroundImage =  ("linear-gradient(" + String(colorA) + ","+String(colorB) + ")" );
+ 
+  }
+  gradientstopA = document.getElementsByClassName("iconA")
+  for( element of gradientstopA){
+    element.setAttribute("stop-color",colorA)
+  }
+  gradientstopB = document.getElementsByClassName("iconB")
+  for( element of gradientstopB){
+    element.setAttribute("stop-color",colorB)
   }
 
-
-
+  active = document.getElementsByClassName("page-item active")
+  for( element of active){
+    element.setAttribute("style", (" background: " + styleBg ));
+  }
 
 }
 
@@ -558,7 +544,7 @@ function getLook(){
   let fontSize = document.forms["looks"]["fontSize"].value;
   localStorage.setItem('fontSize', fontSize)
 // font
-  let dyslexicFont = document.forms["looks"]["dyslexicFont"].checked;
+  let dyslexicFont = document.forms["looks"]["dyslexicFont"].value;
   localStorage.setItem('dyslexicFont', dyslexicFont)
 }
 
@@ -568,15 +554,7 @@ function setIntialColors()
   document.getElementById("mainColor").setAttribute("value", String(localStorage.getItem("mainColor")))
   document.getElementById("colorA").setAttribute("value", localStorage.getItem("colorA"))
   document.getElementById("colorB").setAttribute("value", localStorage.getItem("colorB"))
-   
+  document.getElementById("dyslexicFont").setAttribute("value", localStorage.getItem("dyslexicFont"))
   document.getElementById("fontSize").setAttribute("fontSize", localStorage.getItem("fontSize"))
-
-  if(localStorage.getItem('dyslexicFont') == 'true'){
-    document.getElementById("dyslexicFont").checked = true
-
-  }
-  else{
-    document.getElementById("dyslexicFont").checked = false
-  }
 
 }

@@ -1,0 +1,148 @@
+
+@font-face {
+  font-family: 'opendyslexic';
+	src: url('fonts/OpenDyslexic-Regular.otf');
+	font-style: normal;
+	font-weight: normal;
+} 
+
+@font-face {
+	font-family: 'opendyslexic';
+	src: url('fonts/OpenDyslexic-Italic.otf');
+	font-style: italic;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'opendyslexic';
+	src: url('fonts/OpenDyslexic-Bold.otf');
+	font-weight: bold;
+	font-style: normal;
+} 
+
+@font-face {
+	font-family: 'opendyslexic';
+	src: url('fonts/OpenDyslexic-BoldItalic.ttf');
+	font-weight: bold;
+	font-style: italic;
+} 
+
+:root {
+  --colorB: #1e90ff;
+  --colorA: #ffffff; 
+  --mainColor: #ffffff; 
+  --textColor: #ffffff
+  --bg: radial-gradient(var(colorA), var(colorB) ); 
+  font-size: 16px;
+  border-color:var(--colorA) ;
+}
+
+.gradient-text {
+  /* Fallback: Set a background color. */
+  background-color: red;
+  
+  /* Create the gradient. */
+ 
+  background-image:linear-gradient(var(--colorA),var(--colorB)) ;
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+.bi{
+  border-color: var(--colorA);
+}
+.btn-outline-primary{
+  border-color: var(--colorA);
+  fill : url('#Gradient1');
+}
+.btn-outline-primary:hover{
+  background-image: var(--bg) !important;
+  color: white!important;
+  border: var(--colorA)  !important;
+  fill : url('#Gradient2');
+}
+.page-link{
+border-color: var(--colorA);
+color:white;
+
+}
+.bg-dar{
+  background: var(--mainColor);
+}
+
+.active .page-link{
+  background: var(--bg);
+  border: var(--colorA);
+  color : white;
+}
+
+.bi{
+  background-color: red;
+  
+  /* Create the gradient. */
+ 
+  background-image:linear-gradient(var(--colorA),var(--colorB)) ;
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+
+}
+
+.bg-primary{
+  background: var(--bg)!important;
+}
+
+.btn-text {
+  /* Fallback: Set a background color. */
+  background-color: red;
+  
+  /* Create the gradient. */
+ 
+  background-image:linear-gradient(var(--colorA),var(--colorB)) ;
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.btn-text:hover{
+  /* Fallback: Set a background color. */
+  background-color: white;
+  
+}
+
+.access{
+  font-family:opendyslexic !important;
+}
+
+svg:default{
+  fill: url(#Gradient1);
+}
+svg{
+  fill: inherit;
+}
+
+
