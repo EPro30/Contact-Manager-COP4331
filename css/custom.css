@@ -1,0 +1,294 @@
+@font-face {
+    font-family: "opendyslexic";
+    src: url("fonts/OpenDyslexic-Regular.otf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "opendyslexic";
+    src: url("fonts/OpenDyslexic-Italic.otf");
+    font-style: italic;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "opendyslexic";
+    src: url("fonts/OpenDyslexic-Bold.otf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "opendyslexic";
+    src: url("fonts/OpenDyslexic-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+:root {
+    --colorB: #1e90ff;
+    --colorA: #ffffff;
+    --mainColor: #ffffff;
+    --textColor: #ffffff;
+    --bg: radial-gradient(var(colorA), var(colorB));
+    --fontSize: 16px;
+    font-size: var(--fontSize) !important;
+    border-color: var(--colorA);
+    --bs-primary: var(--colorB) !important;
+    transition: 0s;
+}
+
+.gradient-text {
+    /* Fallback: Set a background color. */
+    background-color: red;
+
+    /* Create the gradient. */
+
+    background-image: linear-gradient(var(--colorA), var(--colorB));
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+.bi {
+    border-color: var(--colorA);
+}
+.btn-outline-primary {
+    border-color: var(--colorA);
+    fill: url("#Gradient1");
+    color: var(--colorB);
+    transition: 0s;
+}
+.btn {
+    border-color: var(--colorA);
+    fill: url("#Gradient1");
+}
+.btn-secondary {
+    background: transparent;
+    border-color: var(--colorA);
+    fill: url("#Gradient1");
+    color: var(--colorB);
+}
+.btn-secondary:active {
+    background: transparent;
+    border-color: var(--colorA);
+    fill: url("#Gradient1");
+    color: var(--colorB);
+}
+.dropdown-toggle {
+    background: transparent !important;
+}
+.active {
+    background: linear-gradient(
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.5)
+        ),
+        linear-gradient(var(--colorA), var(--colorA)) !important; /* first bg is on top of this */
+    /* opacity: 0.25!important; */
+}
+.btn-outline-primary:hover {
+    background-image: var(--bg) !important;
+    color: white !important;
+    border: var(--colorA) !important;
+    fill: url("#Gradient2");
+}
+.btn:hover {
+    background-image: var(--bg) !important;
+    color: white !important;
+    border: var(--colorA) !important;
+    fill: url("#Gradient2");
+}
+.dropdown-toggle:hover {
+    color: white !important;
+    border: var(--colorA) !important;
+}
+.page-link {
+    border-color: var(--colorA);
+    color: white;
+}
+
+.active .page-link {
+    background: var(--bg);
+    border: var(--colorA);
+    color: white !important ;
+}
+
+.bi {
+    background-color: red;
+
+    /* Create the gradient. */
+
+    background-image: linear-gradient(var(--colorA), var(--colorB));
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.bg-primary {
+    background: var(--bg) !important;
+}
+
+.btn-text:hover {
+    /* Fallback: Set a background color. */
+    color: white;
+}
+table {
+    color: white !important;
+}
+
+.access {
+    font-family: opendyslexic !important;
+}
+
+svg:default {
+    fill: url(#Gradient1);
+}
+svg {
+    fill: inherit;
+}
+
+.form-label {
+    color: var(--colorA) !important;
+}
+.dropdown-item .dropdown-toggle {
+    color: var(--colorB) !important;
+}
+
+a {
+    color: var(--colorB) !important;
+}
+
+.active:default {
+    color: white;
+    opacity: 0.5;
+}
+
+.page-size {
+    color: var(--colorB) !important;
+    background-color: transparent !important;
+}
+.dropdown-toggle .show {
+    color: var(--colorB) !important;
+    background-color: transparent !important;
+}
+
+.sortable {
+    color: var(--colorA);
+}
+
+li:active {
+    color: white;
+}
+
+a.page-link:active {
+    color: white !important;
+}
+.form-select {
+    color: var(--colorB);
+}
+option:hover {
+    color: white !important;
+    border: var(--colorA) !important;
+}
+
+option {
+    background-color: var(--textColor) !important;
+    border: var(--colorA) !important;
+}
+
+.focus {
+    color: white !important;
+    opacity: 0.5 !important;
+}
+
+table {
+    color: var(--textColor) !important;
+}
+
+input {
+    color: var(--textColor) !important;
+    background-color: transparent !important;
+}
+input[type="checkbox"] {
+    color: var(--textColor) !important;
+    background-color: transparent !important;
+}
+
+input[type="text"]:focus,
+textarea:focus input[type="text"]:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+    color: var(--colorB);
+}
+
+input[type="resetEmail"]:focus,
+textarea:focus input[type="resetEmail"]:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+    color: var(--colorB);
+}
+
+input[type="password"]:focus,
+textarea:focus input[type="password"]:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+    color: var(--colorB);
+}
+
+select:focus,
+textarea:focus input[type="text"]:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+}
+input[type="checkbox"]:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--colorB) !important;
+    border-color: var(--colorA) !important;
+    color: var(--textColor) !important;
+}
+
+input[type="number"]:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+}
+
+input[type="phone"]:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+}
+
+input[type="email"]:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+}
+
+.pagination:focus {
+    box-shadow: 0 0 5px var(--colorA) !important;
+    border: 1px solid var(--colorA) !important;
+}
+
+option:focus {
+    background: linear-gradient(
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.5)
+        ),
+        linear-gradient(var(--colorA), var(--colorA)) !important; /* first bg is on top of this */
+}

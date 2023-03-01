@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Login</title>
+        <title>Account Settings</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- style sheets -->
@@ -34,31 +34,24 @@
         <!-- Mission Critical V -->
         <link rel="stylesheet" href="css/custom.css" />
         <script src="js/code.js"></script>
+        <script src="js/client-side.js"></script>
         <script src="js/looks.js"></script>
 
         <!-- Mission Critical ^ -->
-
-        <script>
-            function resetEmail() {
-                var T = document.getElementById("resetEmail");
-                T.style.display = "block"; // <-- Set it to block
-            }
-        </script>
     </head>
-    <body class="bg-primary p-5" onload=" styling()">
+    <body class="bg-primary p-1" onload=" AccountSettings();styling()">
         <div
             class="container h-75 d-flex align-items-center justify-content-center"
         >
-            <div class="row">
-                <div class="card-sm bg-dark w-100 px-5 rounded-5 shadow-lg">
-                    <div class="card-body-sm bg">
+            <div class="row pt-3">
+                <div class="card-sm bg-dark w-100 rounded-5 shadow-lg">
+                    <div class="card-body-sm rounded-5">
                         <div class="container-fluid flex-start">
                             <button
                                 type="button"
                                 class="btn btn-outline-primary rounded-pill mt-5"
-                                onclick="location.href='index.html'"
+                                onclick="location.href='contactList.html'"
                             >
-                                <!-- new -->
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="28"
@@ -106,36 +99,82 @@
                             class="col-sm|md|lg|xl|xxl-6 p-2 mx-5 text-center align-self-center"
                             style="display: block"
                         >
-                            <h1
-                                class="gradient-text display-4 pb-5 pt-2 px-5 mx-5 gap-3"
+                            <h6
+                                class="gradient-text display-6 pb-5 pt-1 px-5 mx-5 gap-3"
                             >
-                                Login
-                            </h1>
+                                Account Settings
+                            </h6>
                             <form id="form">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label
+                                                for="fname"
+                                                class="form-label"
+                                            >
+                                                First Name:
+                                            </label>
+                                            <p id="currentFName">First Name</p>
+                                            <input
+                                                type="text"
+                                                class="form-control rounded-pill p-2"
+                                                id="fname"
+                                                placeholder="First Name"
+                                                name="fname"
+                                            />
+                                            <div
+                                                id="firstNameError"
+                                                class="invalid-feedback"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label
+                                                for="lname"
+                                                class="form-label"
+                                            >
+                                                Last Name:
+                                            </label>
+                                            <p id="currentLName">Last Name</p>
+                                            <input
+                                                type="text"
+                                                class="form-control rounded-pill p-2"
+                                                id="lname"
+                                                placeholder="Last Name"
+                                                name="lname"
+                                            />
+                                            <div
+                                                id="lastNameError"
+                                                class="invalid-feedback"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="mb-3 mt-3">
+                                    <!-- This should be UserName not email -->
                                     <label for="email" class="form-label"
                                         >Email:
                                     </label>
+                                    <p id="currentEmail">Email</p>
                                     <input
-                                        type="text"
+                                        type="email"
                                         class="form-control rounded-pill p-2"
                                         id="email"
                                         placeholder="Enter username"
                                         name="email"
                                     />
                                     <div
-                                        id="emailError"
+                                        id="usernameError"
                                         class="invalid-feedback"
                                     ></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label
-                                        for="pwd"
-                                        class="form-label text-primary"
-                                        >Password:</label
-                                    >
+                                    <label for="pwd" class="form-label">
+                                        New Password:
+                                    </label>
                                     <input
-                                        type="password"
+                                        type="text"
                                         class="form-control rounded-pill p-2"
                                         id="pwd"
                                         placeholder="Enter password"
@@ -146,13 +185,30 @@
                                         class="invalid-feedback"
                                     ></div>
                                 </div>
-                                <div class="d-grid gap-3">
+
+                                <div class="mb-3">
+                                    <label for="cnfmpwd" class="form-label">
+                                        Confirm New Password:
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="form-control rounded-pill p-2"
+                                        id="cnfmpwd"
+                                        placeholder="Confirm password"
+                                        name="pswd"
+                                    />
+                                    <div
+                                        id="confirmPasswordError"
+                                        class="invalid-feedback"
+                                    ></div>
+
                                     <button
+                                        id="submit-Button"
                                         type="button"
-                                        class="btn btn-outline-primary btn-block rounded-pill mb-2 mt-4"
-                                        onclick="prepLogin();"
+                                        class="btn btn-outline-primary rounded-pill mt-5"
+                                        onclick=""
                                     >
-                                        Login
+                                        Save
                                     </button>
                                     <div
                                         id="submitButtonError"
@@ -166,101 +222,4 @@
             </div>
         </div>
     </body>
-
-    <script>
-        const usernameTextField = document.getElementById("email");
-        const passwordTextField = document.getElementById("pwd");
-
-        function checkEmptyField(targetElement, textField) {
-            if (textField.value.trim() === "") {
-                textField.classList.add("is-invalid");
-                targetElement.innerHTML = "Field cannot be empty.";
-                targetElement.style.display = "block";
-            } else {
-                textField.classList.remove("is-invalid");
-                targetElement.innerHTML = "";
-                targetElement.style.display = "none";
-            }
-        }
-
-        usernameTextField.addEventListener("blur", function () {
-            checkEmptyField(
-                document.getElementById("emailError"),
-                usernameTextField
-            );
-        });
-
-        passwordTextField.addEventListener("blur", function () {
-            checkEmptyField(
-                document.getElementById("passwordError"),
-                passwordTextField
-            );
-        });
-
-        // Change the submit button error or email error
-        // if the user tries to input username
-        usernameTextField.addEventListener("focus", function () {
-            const targetElement = document.getElementById("emailError");
-            if (targetElement.style.display === "block") {
-                targetElement.style.display = "none";
-            }
-
-            const targetSubmitButtonError =
-                document.getElementById("submitButtonError");
-            if (targetSubmitButtonError.style.display === "block") {
-                targetSubmitButtonError.style.display = "none";
-            }
-        });
-
-        // Change the submit button error or password error
-        // if the user tries to input password
-        passwordTextField.addEventListener("focus", function () {
-            const targetElement = document.getElementById("passwordError");
-            if (targetElement.style.display === "block") {
-                targetElement.style.display = "none";
-            }
-
-            const targetSubmitButtonError =
-                document.getElementById("submitButtonError");
-            if (targetSubmitButtonError.style.display === "block") {
-                targetSubmitButtonError.style.display = "none";
-            }
-        });
-
-        // const submitButton = document.getElementById("submit-Button");
-        function prepLogin() {
-            const targetElement = document.getElementById("submitButtonError");
-            if (checkIsInvalidFeedback()) {
-                targetElement.innerHTML =
-                    "Please enter valid login credentials.";
-                targetElement.style.display = "block";
-            } else if (checkAllEmptyFields()) {
-                targetElement.innerHTML =
-                    "Please enter information for each field before submitting.";
-                targetElement.style.display = "block";
-            } else {
-                doLogin();
-            }
-        }
-
-        function checkIsInvalidFeedback() {
-            const invalidFields = document.querySelectorAll(
-                "input[type='text'].is-invalid, input[type='password'].is-invalid"
-            );
-            return invalidFields.length > 0;
-        }
-
-        function checkAllEmptyFields() {
-            const from = document.getElementById("form");
-            const textFields = form.querySelectorAll(
-                'input[type="text"], input[type="password"]'
-            );
-            for (let i = 0; i < textFields.length; i++) {
-                if (textFields[i].value.trim() === "") {
-                    return true;
-                }
-            }
-            return false;
-        }
-    </script>
 </html>
