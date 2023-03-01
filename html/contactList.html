@@ -1,427 +1,156 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
+  <html lang="en" data-bs-theme="dark">
     <head>
-        <title id="homeTitle">Home</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- all set ^ -->
-        <!-- style sheets -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css"
-        />
-
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-        <script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous"
-        ></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <!-- style -->
+      <title id="homeTitle">Home</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <!-- all set ^ -->
+      <!-- style sheets -->
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+        crossorigin="anonymous"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css"
+      />
+      <!-- Scripts -->
+      <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+      <script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"
+      ></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 
         <!-- Mission Critical V -->
         <link rel="stylesheet" href="css/custom.css" />
         <script src="js/code.js"></script>
         <script src="js/looks.js"></script>
 
-        <!-- Mission Critical ^ -->
+      <!-- Mission Critical ^ -->
     </head>
-
     <body
-        class="bg-primary"
-        class="py-auto"
-        onload="fetchContacts(); welcome(); titleButFunHome();styling();setIntialColors();"
+      class="bg-primary p-auto"
+      onload="fetchContacts(); welcome(); titleButFunHome();"
     >
-        <div class="offcanvas offcanvas-end p-auto" id="demo">
-            <div class="offcanvas-body align-content-center py-auto">
+      <!-- <nav class="navbar navbar-default bg-default d-flex flex-row-reverse" aria-label="First navbar example" data-beeline-skip="true">
+    <div class="container-fluid mx-auto ps-5 d-flex flex-row-reverse">
+
+     <button class="navbar-toggler" type="button"data-bs-toggle="offcanvas" data-bs-target="#demo">
+    <span class="navbar-toggler-icon"> </span>
+  </button>
+  <div class="navbar-collapse collapse show" id="navbarsExample01">
+  </div>
+ </div>
+
+</nav> -->
+
+      <div class="offcanvas offcanvas-end bg-dark text-white p-auto" id="demo">
+        <div class="offcanvas-header"></div>
+        <div class="offcanvas-body align-content-center py-auto">
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="offcanvas"
+          ></button>
+          <div class="d-grid gap-3 align-content-center">
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-block rounded-pill"
+              onclick="location.href='addContact.html'"
+            >
+              Add Contact
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-block rounded-pill"
+              onclick="location.href='settings.html'"
+            >
+              Settings
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-block rounded-pill"
+              onclick="doLogout()"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="container h-75 align-items-center justify-content-center my-5"
+      >
+        <div class="row py-auto">
+          <div class="row container justify-content-center">
+            <div class="col--9 w-100">
+              <div
+                class="card card-xlg bg-dark table-responsive w-100 py-3 rounded-5 shadow-lg"
+              >
                 <div
-                    class="d-grid gap-3 align-content-center align-self-center"
+                  class="card-body bg-dark rounded-5 mw-auto text-white bg-dark"
                 >
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="offcanvas"
-                    ></button>
-                    <!-- custom colors picker form -->
-                    <form id="looks" onchange="getLook();styling();">
-                        <select
-                            class="form-select bg-dark"
-                            aria-label="Default select example"
-                            id="mode"
-                        >
-                            <option value="dark" id="darkMode">
-                                Dark Mode
-                            </option>
-                            <option value="light" id="lightMode">
-                                Light Mode
-                            </option>
-                        </select>
-                        <!-- <div class="row py-3">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="lightMode">
-                <label class="form-check-label form-label" for="flexRadioDefault1">
-                  Light Mode
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="darkMode">
-                <label class="form-check-label form-label" for="flexRadioDefault2">
-                  Dark Mode
-                </label>
-              </div>
-            </div> -->
-                        <div class="row py-3">
-                            <div class="col">
-                                <label for="myColor" class="form-label"
-                                    >Color A</label
-                                >
-                                <input
-                                    type="color"
-                                    class="form-control form-control-color"
-                                    value="setIntialColors()[colorA]"
-                                    title="Choose a color"
-                                    id="colorA"
-                                />
-                            </div>
-                            <div class="col">
-                                <label for="myColor" class="form-label"
-                                    >Color B</label
-                                >
-                                <input
-                                    type="color"
-                                    class="form-control form-control-color"
-                                    value="setIntialColors()[colorB]"
-                                    title="Choose a color"
-                                    id="colorB"
-                                />
-                            </div>
-                        </div>
-                        <div class="row py-3">
-                            <div class="col">
-                                <label for="myColor" class="form-label"
-                                    >Use OpenDyslexic Font?</label
-                                >
-                            </div>
-                            <div class="col">
-                                <input
-                                    class="form-check-input text-primary"
-                                    type="checkbox"
-                                    id="dyslexicFont"
-                                    style="color: var(--textColor)"
-                                />
-                            </div>
-                        </div>
-                        <div class="row py-3">
-                            <div class="col">
-                                <label for="myColor" class="form-label"
-                                    >Font Size:</label
-                                >
-                            </div>
-                            <div class="col">
-                                <input
-                                    type="number"
-                                    id="fontSize"
-                                    name="quantity"
-                                    min="7"
-                                    max="48"
-                                    step="1"
-                                    value="16"
-                                />
-                            </div>
-                        </div>
-                    </form>
-                    <!-- custom colors picker form -->
-
-                    <button
-                        type="button py-3"
-                        class="btn btn-outline-primary btn-block rounded-pill"
-                        id="accountSettingsBtn"
-                        onclick="location.href='accountSettings.html'"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="bi bi-gear"
-                            viewBox="0 0 16 16"
-                        >
-                            <defs>
-                                <linearGradient id="Gradient1">
-                                    <stop
-                                        class="stop1"
-                                        stop-color=" var(--colorA)"
-                                        offset="0%"
-                                    />
-                                    <stop
-                                        class="stop2"
-                                        stop-color=" var(--colorB)"
-                                        offset="100%"
-                                    />
-                                </linearGradient>
-                                <linearGradient id="Gradient2">
-                                    <stop
-                                        class="stop3"
-                                        stop-color="white"
-                                        offset="0%"
-                                    />
-                                    <stop
-                                        class="stop4"
-                                        stop-color="white"
-                                        offset="100%"
-                                    />
-                                </linearGradient>
-                            </defs>
-                            <path
-                                d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"
-                            />
-                            <path
-                                d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"
-                            />
-                        </svg>
-                        Account Settings
-                    </button>
-
-                    <button
-                        type="button py-3"
-                        class="btn btn-outline-primary btn-block rounded-pill"
-                        onclick="doLogout()"
-                        id="logoutBtn"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="bi bi-box-arrow-in-left"
-                            viewBox="0 0 16 16"
-                        >
-                            <defs>
-                                <linearGradient id="Gradient1">
-                                    <stop
-                                        class="stop1"
-                                        stop-color=" var(--colorA)"
-                                        offset="0%"
-                                    />
-                                    <stop
-                                        class="stop2"
-                                        stop-color=" var(--colorB)"
-                                        offset="100%"
-                                    />
-                                </linearGradient>
-                                <linearGradient id="Gradient2">
-                                    <stop
-                                        class="stop3"
-                                        stop-color="white"
-                                        offset="0%"
-                                    />
-                                    <stop
-                                        class="stop4"
-                                        stop-color="white"
-                                        offset="100%"
-                                    />
-                                </linearGradient>
-                            </defs>
-                            <path
-                                fill-rule="evenodd"
-                                d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"
-                            />
-                            <path
-                                fill-rule="evenodd"
-                                d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
-                            />
-                        </svg>
-                        Logout
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="container h-75 align-items-center justify-content-center my-5"
-        >
-            <div class="row py-auto">
-                <div class="row container justify-content-center">
-                    <div class="col-lg-12 w-100">
-                        <div
-                            class="card card-xlg table-responsive w-100 py-3 rounded-5 shadow-lg"
-                        >
-                            <div class="card-body rounded-5 mw-auto">
-                                <div class="table-sm rounded-5 w-100 px-1">
-                                    <div class="d-flex p-3 mx-auto">
-                                        <h5
-                                            class="display-5 mx-auto gradient-text"
-                                            id="welcomeCustom"
-                                        ></h5>
-                                        <button
-                                            class="toggler toggler-lg btn rounded-pill"
-                                            type="button"
-                                            data-bs-toggle="offcanvas"
-                                            data-bs-target="#demo"
-                                            id="menuBtn"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="36"
-                                                height="36"
-                                                class="bi bi-list"
-                                                viewBox="0 0 16 16"
-                                                fill="white"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                                />
-                                            </svg>
-                                        </button>
-                                        <!-- <button type="button" class="btn btn-outline-primary btn-block rounded-pill" onclick="location.href='addContact.html'">Add Contact</button> -->
-                                    </div>
-                                    <div id="toolBar " class="row py-3">
-                                        <div class="col">
-                                            <!-- add contact -->
-                                            <button
-                                                type="button"
-                                                class="btn btn-outline-primary btn-block rounded-pill mx-5 float-start"
-                                                onclick="location.href='addContact.html'"
-                                                id="new contact button"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="40"
-                                                    height="40"
-                                                    class="bi bi-person-plus"
-                                                    viewBox="0 0 16 16"
-                                                    class="p-2"
-                                                    style="padding: 3px"
-                                                >
-                                                    <defs>
-                                                        <linearGradient
-                                                            id="Gradient1"
-                                                        >
-                                                            <stop
-                                                                class="stop1"
-                                                                stop-color=" var(--colorA)"
-                                                                offset="0%"
-                                                            />
-                                                            <stop
-                                                                class="stop2"
-                                                                stop-color=" var(--colorB)"
-                                                                offset="100%"
-                                                            />
-                                                        </linearGradient>
-                                                        <linearGradient
-                                                            id="Gradient2"
-                                                        >
-                                                            <stop
-                                                                class="stop3"
-                                                                stop-color="white"
-                                                                offset="0%"
-                                                            />
-                                                            <stop
-                                                                class="stop4"
-                                                                stop-color="white"
-                                                                offset="100%"
-                                                            />
-                                                        </linearGradient>
-                                                    </defs>
-
-                                                    <path
-                                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
-                                                    />
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class = "col mx-auto float-start"
-                                        style="margin:auto;max-width:50%"">
-                                        <!-- search Bar -->
-                                        <div class="input-group mb-3">
-                                            <input
-                                                type="text"
-                                                class="form-control rounded-start-pill w-25"
-                                                placeholder="Search"
-                                            />
-                                            <button
-                                                class="btn btn-outline-primary rounded-end-pill"
-                                                type="button"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="40"
-                                                    height="40"
-                                                    fill="url(#Gradient1)"
-                                                    class="bi bi-search"
-                                                    viewBox="0 0 16 16"
-                                                    style="padding: 3px"
-                                                >
-                                                    <defs>
-                                                        <linearGradient
-                                                            id="Gradient1"
-                                                        >
-                                                            <stop
-                                                                class="stop1"
-                                                                stop-color=" var(--colorA)"
-                                                                offset="0%"
-                                                            />
-                                                            <stop
-                                                                class="stop2"
-                                                                stop-color=" var(--colorB)"
-                                                                offset="100%"
-                                                            />
-                                                        </linearGradient>
-                                                        <linearGradient
-                                                            id="Gradient2"
-                                                        >
-                                                            <stop
-                                                                class="stop3"
-                                                                stop-color="white"
-                                                                offset="0%"
-                                                            />
-                                                            <stop
-                                                                class="stop4"
-                                                                stop-color="white"
-                                                                offset="100%"
-                                                            />
-                                                        </linearGradient>
-                                                    </defs>
-                                                    <path
-                                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <table
-                                    class="table table-sm table-hover rounded-5 w-100 p-3 align-content-center"
-                                    id="contactList"
-                                    data-search="true"
-                                    data-detail-formatter="detailFormatter"
-                                    data-check-on-init="true"
-                                    data-search-selector="#customSearch"
-                                ></table>
-                            </div>
-                        </div>
+                  <div
+                    class="table-sm rounded-5 w-100 px-1"
+                    data-bs-theme="dark"
+                  >
+                    <div class="d-flex p-3 text-white">
+                      <h5 id="welcomeCustom"></h5>
                     </div>
+                    <div id="toolBar " class="d-flex p-3">
+                      <button
+                        class="toggler bg-dark text-secondary border-0 toggler-lg"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#demo"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="36"
+                          height="36"
+                          fill="currentColor"
+                          class="bi bi-list"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                          />
+                        </svg>
+                      </button>
+                      <input
+                        type="email"
+                        class="form-control rounded-pill"
+                        id="customSearch"
+                        placeholder="search"
+                      />
+                    </div>
+
+                    <table
+                      class="table table-sm table-dark table-hover align-middle text-center rounded-5 w-100 p-3"
+                      id="contactList"
+                      data-search="true"
+                      data-detail-formatter="detailFormatter"
+                      data-check-on-init="true"
+                      data-search-selector="#customSearch"
+                    ></table>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </body>
+  </html>
 </html>
