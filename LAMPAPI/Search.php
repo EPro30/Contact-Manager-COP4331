@@ -3,8 +3,8 @@
     header("Access-Control-Allow-Origin: *");
     
     $data = json_decode(file_get_contents("php://input"), TRUE);
-    $userId = $data['userId'];
-    $wildCard = $data['searchFor'];
+    $userId = $data['UserId'];
+    $wildCard = $data['SearchFor'];
 
     require "config.php";
 

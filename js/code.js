@@ -216,6 +216,34 @@ function fetchContacts() {
     }
 }
 
+function searchAPI() {
+	readUserCookie();
+	let searchContents = document.getElementById("searchBar").value;
+
+    let tmp = { UserId: userId, SearchFor: searchContents};
+    let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + "/Search." + extension;
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    try {
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if (jsonObject.status == true)
+                    generateTable(jsonObject.response);
+            }
+        };
+
+        xhr.send(jsonPayload);
+    } catch (err) {
+        // ADD ERROR MESSAGE
+    }
+}
+
 async function updateContact() {
     [userId, contactId] = await fetchOneContact();
 
@@ -306,17 +334,12 @@ function fetchOneContact() {
                     contactId = jsonObject.response[0].ID;
                     resolve([userId, contactId]);
                 } else {
-                    reject(new Error("Failed to fetch contact"));
+                    reject("Failed to fetch contact");
                 }
             }
         };
         xhr.send(jsonPayload);
     });
-}
-
-function searchAPI() {
-	readUserCookie();
-	
 }
 
 function readCookie(name) {
@@ -376,6 +399,7 @@ function readUserCookie() {
 }
 
 function generateTable(response) {
+    console.log(response);
     if (localStorage.getItem("pageSize") === null) {
         localStorage.setItem("pageSize", 8);
     }
