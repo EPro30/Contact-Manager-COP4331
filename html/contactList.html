@@ -426,5 +426,16 @@
                 </div>
             </div>
         </div>
+        <script>
+            var textField = $("#searchBar");
+
+            textField.on("blur change", function () {
+                if (textField.val().trim() === "") {
+                    console.log("here");
+                    $("#contactList").bootstrapTable("destroy");
+                    fetchContacts();
+                }
+            });
+        </script>
     </body>
 </html>

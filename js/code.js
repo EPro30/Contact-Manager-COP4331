@@ -233,8 +233,13 @@ function searchAPI() {
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
 
-                if (jsonObject.status == true)
+                if (jsonObject.status == true) {
+                    $("#contactList").bootstrapTable("destroy");
                     generateTable(jsonObject.response);
+                } else {
+                    $("#contactList").bootstrapTable("destroy");
+                    
+                }
             }
         };
 
@@ -454,6 +459,7 @@ function generateTable(response) {
         smartDisplay: true,
         data: response,
         pagination: true,
+        cache: false,
         pageSize: localStorage.getItem("pageSize"), //your page size here
         pageList: [4, 8, 16, 24], //list of page sizes
         headerStyle: "headerStyle",
