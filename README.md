@@ -1,21 +1,22 @@
 # Contact-Manager-COP4331
 
 ## Overview
-This is a web app for managing contacts. It allows users to create, edit and delete contacts, as well as search for specific contacts by name, email address, or phone number.
-Link: https://cscop4331c.com
+This is a web app for managing contacts. It allows users to create, edit and delete contacts, as well as search for specific contacts by name, email address, or phone number. <br/>
+**Link:** https://cscop4331c.com
 
 ## Installation
+
 ### Digital Ocean
+
 ### PostMan
+
 ### MobaXterm
-Connect to the server using MobaXtermm.
-Clone the repository and add files in the following order in MobaXterm.
-**Note: images folder is not required**
-<img src="./images/image1.JPG" width="400" title="Main folder setup"/>
-<img src="./images/image2.JPG" width="400" title="LAMP API folder setup"/>
-<img src="./images/image3.JPG" width="400" title="profile image"/>
-<img src="./images/image4.JPG" width="400" title="profile image"/>
-<img src="./images/image5.JPG" width="400" title="profile image"/>
+Connect to the server using MobaXtermm. <br/>
+Clone the repository and add files in the following order in MobaXterm. <br/>
+Create 3 Folders named _LAMP API_, _js_, and _css_ in _/var/www/html_. <br/>
+Add all the PHP scripts available in this repository to _LAMP API_ folder on MobaXterm. <br/>
+Add all the JavaScript files available in this repository to _js_ folder on MobaXterm. <br/>
+Add all the css scripts and fonts folder available in this repository to _css_ folder on MobaXterm. <br/>
 
 ## Usage
 #### To use the app, follow these steps:
