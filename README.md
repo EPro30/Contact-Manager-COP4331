@@ -13,10 +13,10 @@ This is a web app for managing contacts. It allows users to create, edit and del
 ### MobaXterm
 Connect to the server using MobaXtermm. <br/>
 Clone the repository and add files in the following order in MobaXterm. <br/>
-Create 3 Folders named _LAMP API_, _js_, and _css_ in _/var/www/html_. <br/>
-Add all the PHP scripts available in this repository to _LAMP API_ folder on MobaXterm. <br/>
-Add all the JavaScript files available in this repository to _js_ folder on MobaXterm. <br/>
-Add all the css scripts and fonts folder available in this repository to _css_ folder on MobaXterm. <br/>
+-Create 3 Folders named _LAMP API_, _js_, and _css_ in _/var/www/html_. <br/>
+-Add all the PHP scripts available in this repository to _LAMP API_ folder on MobaXterm. <br/>
+-Add all the JavaScript files available in this repository to _js_ folder on MobaXterm. <br/>
+-Add all the css scripts and fonts folder available in this repository to _css_ folder on MobaXterm. <br/>
 
 ## Usage
 #### To use the app, follow these steps:
