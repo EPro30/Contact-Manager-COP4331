@@ -29,7 +29,7 @@ Add all the css scripts and fonts folder available in this repository to _css_ f
 6. To search for a specific contact, enter the name, email address, or phone number in the search bar
 
 #### App Customization:
-##### Click on the hamburger button
+##### Click on the hamburger button to customize the Contact Manager
 **1. Color Scheme:** Use the drop-down to select either _Dark Mode_ or _Light Mode_. <br/>
 **2. Background Color:** Choose your desired _color A and B_ to set the gradient background. <br/>
    _To reset to default color, set_ <br/>
