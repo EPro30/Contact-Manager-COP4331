@@ -51,7 +51,7 @@ If you encounter any issues with the app, please check the console log for error
 We are grateful for the support and resources that have allowed us to create this project, and we hope that it can be useful and enjoyable for others to use.
 
 ## Contact
-Please contact any our group members for further queries and concerns:
+Please contact any our group members for further queries and concerns:<br/>
 Jose Yamin: <br/>
 Oliver Wacker: <br/>
 Hafijur Raman: <br/>
