@@ -1,4 +1,4 @@
-const urlBase = "http://cscop4331c.com/LAMPAPI";
+const urlBase = "https://cscop4331c.com/LAMPAPI";
 const extension = "php";
 
 // USER VARIABLES
@@ -15,23 +15,28 @@ let contactId = "";
 
 // Function to login a user
 function doLogin() {
+    // Storing login credentials
     let login = document.getElementById("email").value;
     let password = document.getElementById("pwd").value;
 
+    // JSON object for login credentials
     let tmp = { Login: login, Password: password };
+    
+    // Converting JSON Object to JSON string
     let jsonPayload = JSON.stringify(tmp);
+    
+    // Making HTTP request to send and retrieve data
     let url = urlBase + "/Login." + extension;
-
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (jsonObject.status == true) {
+                    // Storing user credentials response from the database
                     userId = jsonObject.response[0].ID;
                     firstName = jsonObject.response[0].FirstName;
                     lastName = jsonObject.response[0].LastName;
@@ -39,6 +44,8 @@ function doLogin() {
                     window.location.href = "contactList.html";
                     saveUserCookie();
                 } else {
+                    // Input login-crdentials did not match any user
+                    // in the database
                     document.getElementById("submitButtonError").innerHTML =
                         "Invalid User ID or Password. Please try again.";
                     document.getElementById("submitButtonError").style.display =
@@ -48,28 +55,34 @@ function doLogin() {
                 }
             }
         };
-
+        // sending data
         xhr.send(jsonPayload);
     } catch (err) {
-        // ADD ERROR MESSAGE
+        console.log(err.message);
     }
 }
 
+// Function to create new user account
 function SignUp() {
+    // Storing new user credentials
     firstName = document.getElementById("fname").value;
     lastName = document.getElementById("lname").value;
     let login = document.getElementById("email").value;
     let password = document.getElementById("cnfmpwd").value;
-
+    
+    // JSON object for new user credentials
     let tmp = {
         FirstName: firstName,
         LastName: lastName,
         Login: login,
         Password: password,
     };
+    
+    // Converting JSON object to JSON string
     let jsonPayload = JSON.stringify(tmp);
+    
+    // Making HTTP request to send and retrieve data
     let url = urlBase + "/SignUp." + extension;
-
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -79,11 +92,12 @@ function SignUp() {
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (jsonObject.status == true) {
-                    // not the actual homepage
+                    // New user added to the database
                     window.location.href = "contactList.html";
                     userId = jsonObject.ID;
                     saveUserCookie();
                 } else {
+                    // Duplicate user Id found in the database
                     document
                         .getElementById("email")
                         .classList.add("is-invalid");
@@ -95,12 +109,14 @@ function SignUp() {
                 }
             }
         };
+        // sending data
         xhr.send(jsonPayload);
     } catch (err) {
-        // document.getElementById("loginResult").innerHTML = err.message;
+        console.log(err.message);
     }
 }
 
+// Function to reset user credentials and expiry time
 function doLogout() {
     userId = 0;
     firstName = "";
@@ -110,13 +126,18 @@ function doLogout() {
     window.location.href = "index.html";
 }
 
+// Function to add new contact to the database
 function addContact() {
+    // load current user credentials
     readUserCookie();
+    
+    // Storing new Contact information
     contactFirstName = document.getElementById("fname").value;
     contactLastName = document.getElementById("lname").value;
     phoneNumber = document.getElementById("phone").value;
     emailAddress = document.getElementById("email").value;
 
+    // JSON Object for new Contact information
     let tmp = {
         FirstName: contactFirstName,
         LastName: contactLastName,
@@ -124,7 +145,11 @@ function addContact() {
         EmailAddress: emailAddress,
         UserID: userId,
     };
+    
+    // Converting JSON Object to JSON string
     let jsonPayload = JSON.stringify(tmp);
+    
+    // Making HTTP request to send and retrieve data 
     let url = urlBase + "/CreateContact." + extension;
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -135,8 +160,10 @@ function addContact() {
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (jsonObject.status == true) {
+                  // New contact successfully added to the database
                     window.location.href = "contactList.html";
                 } else {
+                  // Duplicate phone numbers found in the contact list
                     document
                         .getElementById("phone")
                         .classList.add("is-invalid");
@@ -148,24 +175,33 @@ function addContact() {
                 }
             }
         };
+        // sending data
         xhr.send(jsonPayload);
     } catch (err) {
-        // document.getElementById("loginResult").innerHTML = err.message;
+        console.log(err.message);
     }
 }
 
+// Function to delete contact based on phone number
 function deleteContact() {
+    // load current user credentials
     readUserCookie();
+    
+    // store phone number of the selected contact
     phoneNumber = document.getElementById("displayPhone").textContent;
-
+  
+    // JSON Object for phone number and userId 
+    // required for filtering database
     let tmp = {
         PhoneNumber: phoneNumber,
         UserID: userId,
     };
 
+    // Converting JSON Object to JSON string
     let jsonPayload = JSON.stringify(tmp);
+    
+    // Making HTTP request to send and retrieve data
     let url = urlBase + "/DeleteContact." + extension;
-
     let xhr = new XMLHttpRequest();
     xhr.open("DELETE", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -175,86 +211,122 @@ function deleteContact() {
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (jsonObject.status == true) {
+                // Selected contact has been deleted successfully
+                // from the database
                     window.location.href = "contactList.html";
                 } else {
                     return;
                 }
             }
         };
+        // sending data
         xhr.send(jsonPayload);
     } catch (err) {
-        // document.getElementById("loginResult").innerHTML = err.message;
+        console.log(err.message);
     }
 }
 
 function fetchContacts() {
+
+    // Clear search error message
+    document.getElementById("errorMsg").textContent = "";
+    
+    // load current user information
     readUserCookie();
 
+    // JSON object for user id required for filtering database
     let tmp = { UserID: userId };
+    
+    // Converting JSON Object to JSON String
     let jsonPayload = JSON.stringify(tmp);
+    
+    // Making HTTP request to send and retrieve data 
     let url = urlBase + "/FetchAllContacts." + extension;
-
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
     try {
         xhr.onreadystatechange = function () {
+        
             // check if readystate is DONE (4) and the status is OK (200)
             if (this.readyState == 4 && this.status == 200) {
+            
                 // save the response from the api
                 let jsonObject = JSON.parse(xhr.responseText);
-
-                if (jsonObject.status == true)
+                
+                // contact list found for the given user id
+                if (jsonObject.status == true) 
                     generateTable(jsonObject.response);
             }
         };
-
+        // sending data
         xhr.send(jsonPayload);
     } catch (err) {
-        // ADD ERROR MESSAGE
+        console.log(err.message);
     }
 }
 
+// Function to filter contact list for specific search input
 function searchAPI() {
-	readUserCookie();
-	let searchContents = document.getElementById("searchBar").value;
 
-    let tmp = { UserId: userId, SearchFor: searchContents};
-    let jsonPayload = JSON.stringify(tmp);
-    let url = urlBase + "/Search." + extension;
+  // clear search error message.
+  document.getElementById("errorMsg").textContent = "";
+  
+  // load current user information
+	readUserCookie();
+ 
+  // store search input
+	let searchContents = document.getElementById("searchBar").value;
     
+    // JSON object for serach input and user input
+    // required for filtering database
+    let tmp = { UserId: userId, SearchFor: searchContents};
+    
+    // Converting JSON object to JSON String
+    let jsonPayload = JSON.stringify(tmp);
+    
+    // Making HTTP request to send and retrieve data
+    let url = urlBase + "/Search." + extension;
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-
     try {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (jsonObject.status == true) {
+                  // Destroying and regenerating table based on search response
                     $("#contactList").bootstrapTable("destroy");
                     generateTable(jsonObject.response);
                 } else {
+                  // Destroy and Set error message
                     $("#contactList").bootstrapTable("destroy");
-                    
+                    document.getElementById("errorMsg").innerHTML =
+                        "No record(s) found.";
+                    document.getElementById("errorMsg").style.display =
+                        "block";
                 }
             }
         };
-
+        // sending data
         xhr.send(jsonPayload);
     } catch (err) {
-        // ADD ERROR MESSAGE
+      console.log(err.message);
     }
 }
 
+// Function to update selected contact
 async function updateContact() {
+
+    // Fetch selected contact
     [userId, contactId] = await fetchOneContact();
 
+    // Store current contact information
     [contactFirstName, contactLastName, emailAddress, phoneNumber] =
         getTextFieldValues();
 
+    // JSON Object for current contact information
     let tmp = {
         ID: contactId,
         FirstName: contactFirstName,
@@ -263,9 +335,12 @@ async function updateContact() {
         EmailAddress: emailAddress,
         UserID: userId,
     };
+    
+    // Converting JSON object to JSON string
     let jsonPayload = JSON.stringify(tmp);
-    let url = urlBase + "/UpdateContact." + extension;
-
+    
+    // Making HTTP request to send and retrieve data
+    let url = urlBase + "/ContactUpdate." + extension;
     let xhr = new XMLHttpRequest();
     xhr.open("PUT", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -273,23 +348,30 @@ async function updateContact() {
         xhr.onreadystatechange = function () {
             // check if readystate is DONE (4) and the status is OK (200)
             if (this.readyState == 4 && this.status == 200) {
+            
                 // save the response from the api
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (jsonObject.status == true) {
+                // Contact information successfully updated
                     window.location.href = "contactList.html";
                 } else {
+                // Duplicate entries found
+                    document.getElementById("existingNumber").innerHTML = 
+                        "One or more contacts exist with similar information.";
+                    document.getElementById("existingNumber").style.display = "block";
                     return;
                 }
             }
         };
-
+        // sending data
         xhr.send(jsonPayload);
     } catch (err) {
-        // ADD ERROR MESSAGE
+        console.log(err.message);
     }
 }
 
+// Function to retrieve input from text fields
 function getTextFieldValues() {
     if (document.getElementById("fname").value === "") {
         contactFirstName = document.getElementById("displayFirst").textContent;
@@ -318,24 +400,31 @@ function getTextFieldValues() {
     return [contactFirstName, contactLastName, emailAddress, phoneNumber];
 }
 
+// Function to fetch individual contact from contact list
 function fetchOneContact() {
     readUserCookie();
+    
+    // Filter contact list based on phone number
     phoneNumber = document.getElementById("displayPhone").textContent;
 
+    // JSON object for specific phone number and userId
     let tmp = { PhoneNumber: phoneNumber, UserID: userId };
+    
+    // Converting JSON object to JSON string
     let jsonPayload = JSON.stringify(tmp);
+    
+    // Making HTTP request to send and retrieve data
     let url = urlBase + "/FetchOneContact." + extension;
-
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (jsonObject.status == true) {
+                    // retrieving data on successful query execution
                     contactId = jsonObject.response[0].ID;
                     resolve([userId, contactId]);
                 } else {
@@ -343,10 +432,12 @@ function fetchOneContact() {
                 }
             }
         };
+        // sending data
         xhr.send(jsonPayload);
     });
 }
 
+// Function to read document.cookie for current user
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(";");
@@ -360,10 +451,14 @@ function readCookie(name) {
     return null;
 }
 
+// Function to store User information in document.cookie
 function saveUserCookie() {
+    // Storing expiry time for current user
     let minutes = 20;
     let date = new Date();
     date.setTime(date.getTime() + minutes * 60 * 1000);
+    
+    // Storing individual fields
     document.cookie =
         "UserCookie=firstName=" +
         firstName +
@@ -375,6 +470,7 @@ function saveUserCookie() {
         date.toGMTString();
 }
 
+// Function to extract individual information from user cookie
 function readUserCookie() {
     userId = -1;
     let data = readCookie("UserCookie");
@@ -398,11 +494,10 @@ function readUserCookie() {
 
     if (userId < 0) {
         window.location.href = "index.html";
-    } else {
-        // document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
     }
 }
 
+// Function to generate and display table for contact list
 function generateTable(response) {
     console.log(response);
     if (localStorage.getItem("pageSize") === null) {
@@ -490,7 +585,6 @@ function generateTable(response) {
     tableHeight = tab.offsetHeight;
     tableRatio = tableHeight / tableWidth;
 
-    console.log(String(tableHeight), "/", String(tableWidth));
     // wider table = smaller number
     if (
         localStorage.getItem("pageSize") == 4 ||
@@ -528,6 +622,7 @@ function generateTable(response) {
     }
 }
 
+// Function to format contact list details
 function detailFormatter(index, row) {
     var html = [];
 
@@ -579,6 +674,7 @@ function detailFormatter(index, row) {
     return html.join("");
 }
 
+// Function to set display individual contact information
 function getContact(id) {
     kids = id.children;
     localStorage.setItem("FirstName", kids[0].innerText);
@@ -588,6 +684,7 @@ function getContact(id) {
     // localStorage.setItem("dateCreated", kids[4].innerText);
 }
 
+// Function to set display of home-page
 function populateFullScreen() {
     document.getElementById("displayFirst").innerText =
         localStorage.getItem("FirstName");
@@ -599,6 +696,7 @@ function populateFullScreen() {
         localStorage.getItem("PhoneNumber");
 }
 
+// Function to set display of edit-page
 function populateFullScreenEdit() {
     document.getElementById("displayFirst").innerText =
         localStorage.getItem("FirstName");
@@ -610,6 +708,7 @@ function populateFullScreenEdit() {
         localStorage.getItem("PhoneNumber");
 }
 
+// Function to set display of home-page tab title
 function titleButFun() {
     title = document.getElementsByTagName("title");
     for (i of title) {
@@ -619,6 +718,7 @@ function titleButFun() {
     }
 }
 
+// Function to set display of edit-page tab title
 function titleButFunEdit() {
     title = document.getElementsByTagName("title");
     for (i of title) {
@@ -630,6 +730,7 @@ function titleButFunEdit() {
     }
 }
 
+// Function to set display of table header
 function headerStyle(column) {
     return {
         firstName: {
@@ -663,6 +764,7 @@ function headerStyle(column) {
     }[column.field];
 }
 
+// Supplementary Function
 function cellStyle(value, row, index) {
     return {
         //classes: 'px-0 m-0 border-top border-bottom border-0',
@@ -672,6 +774,7 @@ function cellStyle(value, row, index) {
     };
 }
 
+// Supplementary Function
 function rowStyle(row, index) {
     return {
         // classes: 'p-0 m-0 border-0',
@@ -683,22 +786,14 @@ function rowStyle(row, index) {
     };
 }
 
+// Function to set display of home page
 function welcome() {
     title = document.getElementById("welcomeCustom");
     title.innerText = "Welcome " + firstName + " " + lastName + "!";
 }
+
+// Function to set display of home page tab title
 function titleButFunHome() {
     title = document.getElementById("homeTitle");
     title.innerText = firstName + " " + lastName + "'s contacts";
-}
-
-function AccountSettings() {
-    fName = document.getElementById("currentFName");
-    fName.innerText = firstName;
-
-    lName = document.getElementById("currentLName");
-    lName.innerText = lastName;
-
-    email = document.getElementById("currentEmail");
-    email.innerText = userId;
 }
