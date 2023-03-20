@@ -55,6 +55,6 @@ Please contact any our group members for further queries and concerns:<br/>
 Jose Yamin: <br/>
 Oliver Wacker: <br/>
 Hafijur Raman: raman.hafijur22@gmail.com<br/>
-Reynaldo Martinez: <br/>
+Reynaldo Martinez: reynaldo.martinez1030@knights.ucf.edu<br/>
 Patrick Ijieh: <br/>
 Riya Singh: red.s10618@gmail.com <br/>
