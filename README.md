@@ -6,9 +6,14 @@ This is a web app for managing contacts. It allows users to create, edit and del
 
 ## Installation
 
+### MySQL
+Create a database for storing user id, contact id, last name, first name, email address, and phone number<br/>
+
 ### Digital Ocean
+Create a domain name and host your webapp!<br/>
 
 ### PostMan
+Use LAMP API scripts to run and test various request and response calls<br/>
 
 ### MobaXterm
 Connect to the server using MobaXtermm. <br/>
