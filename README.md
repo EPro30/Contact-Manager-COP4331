@@ -43,8 +43,6 @@ Clone the repository and add files in the following order in MobaXterm. <br/>
 **3. Dyslexic Font:** Check the _OpenDyslexic_ box to turn on the Dyslexic accessibility feature. <br/> 
 **4. Font Size:** Increase or decrease font size by entering desired font-size-number. <br/>
 
-## Configuration
-
 ## Troubleshooting
 If you encounter any issues with the app, please check the console log for error messages. If you need further assistance, please refer to **Contact** section below
 
